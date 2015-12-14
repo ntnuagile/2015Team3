@@ -16,7 +16,7 @@ namespace TeamProject.Tests
             User new_user = new User();
             Lists list = new Lists();
             list.add(new_user);
-            Assert.That(list.number,Is.EqualTo(1));
+            Assert.That(list.number(),Is.EqualTo(1));
 
         }
         [Test]

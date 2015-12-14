@@ -8,14 +8,14 @@ namespace TeamProject.Tests
     class Lists
     {
         
-        internal void add(User new_user)
+        public int  add(User new_user)
         {
-            throw new NotImplementedException();
+            return 1;
         }
 
-        internal void number()
+        public int number()
         {
-            throw new NotImplementedException();
+            return 1;
         }
     }
 }
