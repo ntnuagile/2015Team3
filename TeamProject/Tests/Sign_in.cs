@@ -8,12 +8,15 @@ using System.Threading.Tasks;
 namespace TeamProject.Tests
 {
     [TestFixture]
-    public class _06Test
+    public class Sign_in
     {
         [Test]
-        public void Test()
+        public void CheckUser()
         {
-            Assert.That("Team 3", Is.EqualTo("Team 3"));
+            User newuser = new User;
+            User[] array = new User[5];
+            newuser
+            
         }
     }
 }
