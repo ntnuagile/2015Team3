@@ -22,7 +22,7 @@ namespace TeamProject.Tests
         [Test]
         public void Test2()
         {
-            Assert.That('A' + 1, Is.EqualTo('B'));
+            Assert.That((char)('A' + 1), Is.EqualTo('B'));
         }
 
         [Test]
