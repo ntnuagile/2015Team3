@@ -8,9 +8,17 @@ namespace TeamProject
 {
     class Article
     {
-        static public int a = 3;
+        public string title;
        
+        public string getTitle()
+        {
+            return title;
+        }
 
+        public int SameTitle(string keyword)
+        {
+            return String.Compare(title, keyword);
+        }
         static public int  five()
         {
       
