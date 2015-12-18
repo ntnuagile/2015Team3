@@ -67,9 +67,9 @@
     <Compile Include="Article.cs" />
     <Compile Include="main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sign_in.cs" />
+    <Compile Include="Register.cs" />
+    <Compile Include="Reply.cs" />
     <Compile Include="Tests\Sign_in.cs" />
-    <Compile Include="Tests\User.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>

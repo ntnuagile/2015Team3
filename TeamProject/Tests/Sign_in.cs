@@ -13,9 +13,10 @@ namespace TeamProject.Tests
         [Test]
         public void CheckUser()
         {
-            User newuser = new User;
             User[] array = new User[5];
-            newuser
+            
+            
+            
             
         }
     }

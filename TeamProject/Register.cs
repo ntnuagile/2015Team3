@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace TeamProject
 {
-    class User
+    class Register
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
-
-        public string getuser()
+        public bool Sign_in_check(string Username, string Password)
         {
-            return Username;
+
+            return true;
         }
     }
 }

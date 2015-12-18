@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 
 namespace TeamProject
 {
-    class Sign_in
+    class Reply
     {
-        public bool Sign_in_check(string Username, string Password)
-        {
-            
-            return true;
-        }
     }
 }
