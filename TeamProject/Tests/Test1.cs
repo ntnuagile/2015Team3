@@ -26,15 +26,15 @@ namespace TeamProject.Tests
         [Test]
         public void TestPublish()
         {
-            string Title = "Article1";
-            List<string> Content = new List<string>();
+            Article Art = new Article();
+            Art.Title = "Test1";
+            Art.AuthorID = 0;
+            Art.ArticleIndex = 0;
+            Art.Content.Add("123");
 
-            Content.Add("I am Stupid");
-            Content.Add("Second Line");
+            DB.publish(Art);
 
-            DB.publish(0, Title, Content);
-
-           // Assert.That(DB.DB[0].ArticleIndex, Is.EqualTo(0));
+            Assert.That(DB.DB[0].ArticleIndex, Is.EqualTo(0));
         }
 
         //test XXXX

@@ -13,12 +13,9 @@ namespace TeamProject
         public int MaxArticle = 100;
         public int NumArticle = 0;
 
-        public void publish(int UserID, string Title, List<string> Content)
+        public void publish(Article Art)
         {
-            //DB[NumArticle].AuthorID = 0;
-            DB[NumArticle].Title = Title;
-            DB[NumArticle].Content = Content;
-            DB[NumArticle].ArticleIndex = NumArticle;
+            DB[NumArticle] = Art;
             NumArticle += 1;
         }
 
