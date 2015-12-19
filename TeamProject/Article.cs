@@ -9,14 +9,8 @@ namespace TeamProject
     class Article
     {
         public string Title;
-        public string[] Content = new string[20];
+        public List<string> Content = new List<string>();
         public int AuthorID;
         public int ArticleIndex;
-
-        void publish(int UserID)
-        {
-            AuthorID = UserID;
-        }
-
     }
 }
