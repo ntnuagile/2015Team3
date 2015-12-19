@@ -15,7 +15,7 @@ namespace TeamProject
 
         public void publish(int UserID, string Title, List<string> Content)
         {
-            DB[NumArticle].AuthorID = UserID;
+            DB[NumArticle].AuthorID = 0;
             DB[NumArticle].Title = Title;
             DB[NumArticle].Content = Content;
             DB[NumArticle].ArticleIndex = NumArticle;
