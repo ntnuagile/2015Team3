@@ -16,6 +16,40 @@ namespace TeamProject
             return Username;
         }
 
-        
+
+
+        public string Name { get; set; }
+
+        internal void SetName(string account_name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string Account { get; set; }
+
+        internal void SetAccount(string account_name)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void SetGender(char gender)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void SetPassword(string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void SetBirth(string birth)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void SetID(string id_number)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
