@@ -50,6 +50,6 @@ namespace TeamProject
         {
             ID = id_number;
         }
-        public bool IsLogin { get; set; }//
+        public bool IsLogin { get; set; }
     }
 }
