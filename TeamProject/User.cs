@@ -8,7 +8,7 @@ namespace TeamProject
 {
     class User
     {
-        public string Username { get; set; }
+        public string Username { get; set; }//姓名
         public string Password { get; set; }
 
         public string getuser()
@@ -16,40 +16,40 @@ namespace TeamProject
             return Username;
         }
 
-
-
-        public string Name { get; set; }
+        public string Name { get; set; }//暱稱
 
         internal void SetName(string account_name)
         {
-            throw new NotImplementedException();
+            Name = account_name;
         }
 
         public string Account { get; set; }
 
         internal void SetAccount(string account_name)
         {
-            throw new NotImplementedException();
+            Account = account_name;
         }
 
-        internal void SetGender(char gender)
+        public char Gender { get; set; }
+        internal void SetGender(char gender_kind)
         {
-            throw new NotImplementedException();
+            Gender = gender_kind;
         }
 
         internal void SetPassword(string password)
         {
-            throw new NotImplementedException();
+            Password = password;
         }
-
+        public string Birth { get; set; }
         internal void SetBirth(string birth)
         {
-            throw new NotImplementedException();
+            Birth = birth;
         }
-
+        public string ID { get; set; }
         internal void SetID(string id_number)
         {
-            throw new NotImplementedException();
+            ID = id_number;
         }
+        public bool IsLogin { get; set; }
     }
 }

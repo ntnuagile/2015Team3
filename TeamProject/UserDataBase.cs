@@ -11,9 +11,9 @@ namespace TeamProject
         const int maxUserQua = 200;
         private static int nowUserQua = 0; 
         private static User[] userDataBase = new User[maxUserQua];
-        class Register
+        public  class Register
         {
-            private int SearchUserAccount(string s_name)
+            public int SearchUserAccount(string s_name)
             {
                 
                 for(int index = 0 ; index < nowUserQua ; ++index)
@@ -33,7 +33,6 @@ namespace TeamProject
                 string birth;
                 string id_number;
                 char gender = '\0';
-
                 Console.WriteLine("The Register service:");
                 Console.WriteLine();
                 Console.WriteLine("Please input the Account Name that you want to register:");
@@ -44,24 +43,37 @@ namespace TeamProject
                     Console.WriteLine("The account has been used. Please re-enter a account :");
                     account_name = Console.ReadLine();
                 }
-                Console.WriteLine("The name is available , please fill in the follow information:");
-                Console.WriteLine("Your nickname: ");
-                nickname = Console.ReadLine();
-                Console.WriteLine("Your gender (M/F): ");
-                gender = Console.ReadLine()[0];
-                Console.WriteLine("Your password :");
-                password = Console.ReadLine();
-                Console.WriteLine("Your Birth (XXXX/XX/XX):");
-                birth = Console.ReadLine();
-                Console.WriteLine("Your ID number :");
-                id_number = Console.ReadLine();
-                userDataBase[nowUserQua].SetAccount(account_name);
-                userDataBase[nowUserQua].SetName(nickname);
-                userDataBase[nowUserQua].SetGender(gender);
-                userDataBase[nowUserQua].SetPassword(password);
-                userDataBase[nowUserQua].SetBirth(birth);
-                userDataBase[nowUserQua].SetID(id_number);
-                return true;
+                Console.WriteLine("The name is available , do you want to create your account?(Y/N)");
+                Console.WriteLine("If you press N , than you will back to the main page :");
+
+                if ( Console.ReadLine()[0] == 'Y' )
+                {
+                    Console.WriteLine("Now, please input the following information :");
+                    Console.WriteLine("Your nickname: ");
+                    nickname = Console.ReadLine();
+                    Console.WriteLine("Your gender (M/F): ");
+                    gender = Console.ReadLine()[0];
+                    Console.WriteLine("Your password :");
+                    password = Console.ReadLine();
+                    Console.WriteLine("Your Birth (XXXX/XX/XX):");
+                    birth = Console.ReadLine();
+                    Console.WriteLine("Your ID number :");
+                    id_number = Console.ReadLine();
+                    userDataBase[nowUserQua].SetAccount(account_name);
+                    userDataBase[nowUserQua].SetName(nickname);
+                    userDataBase[nowUserQua].SetGender(gender);
+                    userDataBase[nowUserQua].SetPassword(password);
+                    userDataBase[nowUserQua].SetBirth(birth);
+                    userDataBase[nowUserQua].SetID(id_number);
+                    nowUserQua += 1;
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine("Now, back to the main page.");
+                    Console.Read();
+                    return false;
+                }
             }
         }
         
