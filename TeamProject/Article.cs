@@ -8,26 +8,15 @@ namespace TeamProject
 {
     class Article
     {
-        public string title;
-       
-        public string getTitle()
+        public string Title;
+        public string[] Content = new string[20];
+        public int AuthorID;
+        public int ArticleIndex;
+
+        void publish(int UserID)
         {
-            return title;
+            AuthorID = UserID;
         }
 
-        public int SameTitle(string keyword)
-        {
-            return String.Compare(title, keyword);
-        }
-        static public int  five()
-        {
-      
-            return 5;
-        }
-
-        static public int zero()
-        {
-            return 0;
-        }
     }
 }

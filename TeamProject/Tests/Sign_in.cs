@@ -15,7 +15,7 @@ namespace TeamProject.Tests
         {
             User[] array = new User[5];
         }
-        [Test]
+       /* [Test]
         public void SearchbyTitle()
         {
             Article a = new Article(); //construct one article
@@ -50,6 +50,6 @@ namespace TeamProject.Tests
             Assert.That(same[3], Is.EqualTo(0));
             Assert.That(same[4], Is.EqualTo(0));
             
-        }
+        }*/
     }
 }
