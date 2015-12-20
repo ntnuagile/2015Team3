@@ -34,11 +34,11 @@ namespace TeamProject.Tests
 
             DB.publish(Art);
 
-            Assert.That(DB.DB[0].ArticleIndex, Is.EqualTo(0));
-            Assert.That(DB.DB[0].AuthorID, Is.EqualTo(0));
-            Assert.That(DB.DB[0].Title, Is.EqualTo("Test1"));
-            Assert.That(DB.DB[0].Content[0], Is.EqualTo("123"));
-            Assert.That(DB.DB[0].Content[1], Is.EqualTo("456"));
+            Assert.That(DB.DB[DB.NumArticle - 1].ArticleIndex, Is.EqualTo(0));
+            Assert.That(DB.DB[DB.NumArticle - 1].AuthorID, Is.EqualTo(0));
+            Assert.That(DB.DB[DB.NumArticle - 1].Title, Is.EqualTo("Test1"));
+            Assert.That(DB.DB[DB.NumArticle - 1].Content[0], Is.EqualTo("123"));
+            Assert.That(DB.DB[DB.NumArticle - 1].Content[1], Is.EqualTo("456"));
         }
 
         [Test]
@@ -58,8 +58,8 @@ namespace TeamProject.Tests
             DB.publish(Art);
             DB.publish(Art2);
 
-            Assert.That(DB.DB[1].ArticleIndex, Is.EqualTo(1));
-            Assert.That(DB.DB[2].ArticleIndex, Is.EqualTo(2));
+            Assert.That(DB.DB[DB.NumArticle - 2].ArticleIndex, Is.EqualTo(1));
+            Assert.That(DB.DB[DB.NumArticle - 1].ArticleIndex, Is.EqualTo(2));
         }
 
         //test XXXX
