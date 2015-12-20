@@ -24,24 +24,6 @@ namespace TeamProject.Tests
         ArticleDataBase DB = new ArticleDataBase();
 
         [Test]
-        public void TestSinglePublish()
-        {
-            Article Art = new Article();
-            Art.Title = "Test1";
-            Art.AuthorID = DB.NumArticle;
-            Art.Content.Add("123");
-            Art.Content.Add("456");
-
-            DB.publish(Art);
-
-            Assert.That(DB.DB[DB.NumArticle - 1].ArticleIndex, Is.EqualTo(0));
-            Assert.That(DB.DB[DB.NumArticle - 1].AuthorID, Is.EqualTo(0));
-            Assert.That(DB.DB[DB.NumArticle - 1].Title, Is.EqualTo("Test1"));
-            Assert.That(DB.DB[DB.NumArticle - 1].Content[0], Is.EqualTo("123"));
-            Assert.That(DB.DB[DB.NumArticle - 1].Content[1], Is.EqualTo("456"));
-        }
-
-        [Test]
         public void TestPublishes()
         {
             Article Art = new Article();
@@ -58,8 +40,18 @@ namespace TeamProject.Tests
             DB.publish(Art);
             DB.publish(Art2);
 
-            Assert.That(DB.DB[DB.NumArticle - 2].ArticleIndex, Is.EqualTo(1));
-            Assert.That(DB.DB[DB.NumArticle - 1].ArticleIndex, Is.EqualTo(2));
+            Assert.That(DB.DB[0].ArticleIndex, Is.EqualTo(0));
+            Assert.That(DB.DB[1].ArticleIndex, Is.EqualTo(1));
+
+            Assert.That(DB.DB[0].AuthorID, Is.EqualTo(0));
+            Assert.That(DB.DB[1].AuthorID, Is.EqualTo(4));
+
+            Assert.That(DB.DB[0].Title, Is.EqualTo("GG3B0"));
+            Assert.That(DB.DB[1].Title, Is.EqualTo("Asiagodtone"));
+
+            Assert.That(DB.DB[0].Content[0], Is.EqualTo("123"));
+            Assert.That(DB.DB[1].Content[1], Is.EqualTo("GG"));
+            Assert.That(DB.DB[1].Content[2], Is.EqualTo("20FF"));
         }
 
         //test XXXX
