@@ -38,6 +38,8 @@ namespace TeamProject.Tests
             Assert.That(DB.DB[0].ArticleIndex, Is.EqualTo(0));
             Assert.That(DB.DB[0].AuthorID, Is.EqualTo(0));
             Assert.That(DB.DB[0].Title, Is.EqualTo("Test1"));
+            Assert.That(DB.DB[0].Content[0], Is.EqualTo("123"));
+            Assert.That(DB.DB[0].Content[1], Is.EqualTo("456"));
         }
 
         //test XXXX
