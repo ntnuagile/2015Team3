@@ -58,8 +58,8 @@ namespace TeamProject.Tests
             DB.publish(Art);
             DB.publish(Art2);
 
-            Assert.That(DB.DB[0].ArticleIndex, Is.EqualTo(0));
             Assert.That(DB.DB[1].ArticleIndex, Is.EqualTo(1));
+            Assert.That(DB.DB[2].ArticleIndex, Is.EqualTo(2));
         }
 
         //test XXXX
