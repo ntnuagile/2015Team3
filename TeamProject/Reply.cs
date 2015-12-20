@@ -8,6 +8,7 @@ namespace TeamProject
 {
     class Reply
     {
- 
+        public string Reply_context;
+        public string user_name;
     }
 }
