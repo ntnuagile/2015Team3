@@ -31,10 +31,13 @@ namespace TeamProject.Tests
             Art.AuthorID = 0;
             Art.ArticleIndex = 0;
             Art.Content.Add("123");
+            Art.Content.Add("456");
 
             DB.publish(Art);
 
             Assert.That(DB.DB[0].ArticleIndex, Is.EqualTo(0));
+            Assert.That(DB.DB[0].AuthorID, Is.EqualTo(0));
+            Assert.That(DB.DB[0].Title, Is.EqualTo("Test1"));
         }
 
         //test XXXX
