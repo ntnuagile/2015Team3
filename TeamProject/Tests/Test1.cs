@@ -22,6 +22,7 @@ namespace TeamProject.Tests
 
         //test 發文
         ArticleDataBase DB = new ArticleDataBase();
+       
 
         [Test]
         public void TestPublishes()
@@ -54,7 +55,53 @@ namespace TeamProject.Tests
             Assert.That(DB.DB[1].Content[1], Is.EqualTo("20FF"));
         }
 
-        //test XXXX
+
+        ReplyDataBase[] RD = new ReplyDataBase[100];
+        [Test]
+        public void PushReplay()
+        {
+            int A_ID = 0;
+            ReplyDataBase R =new ReplyDataBase();
+            R.Article_ID=A_ID;
+
+            Reply  re=new Reply();
+            re.user_name="lala";
+            re.Reply_context="thanks";
+           
+            R.push(re);
+            
+
+            Reply re2 = new Reply();
+            re2.user_name = "lili";
+            re2.Reply_context = "aaaaaaa";
+
+            R.push(re2);
+
+            RD[0]=R;
+            A_ID=4;
+            ReplyDataBase R1 = new ReplyDataBase();
+            Reply  re3=new Reply();
+            re3.user_name="ruru";
+            re3.Reply_context="cccccccc";
+
+            R1.push(re3);
+            RD[4] = R1;
+
+            Assert.That(RD[0].num, Is.EqualTo(2));
+            Assert.That(RD[0].RD[0].Reply_context, Is.EqualTo("thanks"));
+            Assert.That(RD[0].RD[0].user_name, Is.EqualTo("lala"));
+
+
+            Assert.That(RD[0].RD[1].Reply_context, Is.EqualTo("aaaaaaa"));
+            Assert.That(RD[0].RD[1].user_name, Is.EqualTo("lili"));
+
+
+            Assert.That(RD[4].num, Is.EqualTo(1));
+            Assert.That(RD[4].RD[0].Reply_context, Is.EqualTo("cccccccc"));
+            Assert.That(RD[4].RD[0].user_name, Is.EqualTo("ruru"));
+
+
+        }
 
     }
 }
