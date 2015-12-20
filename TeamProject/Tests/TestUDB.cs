@@ -22,6 +22,7 @@ namespace TeamProject.Tests
             User cpyu;
             tudb.GetUser(out cpyu, 0);
             Assert.That(cpyu.GetAccount() , Is.EqualTo("GG123"));
+
         }
     }
 }
