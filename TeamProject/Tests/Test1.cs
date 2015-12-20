@@ -24,12 +24,11 @@ namespace TeamProject.Tests
         ArticleDataBase DB = new ArticleDataBase();
 
         [Test]
-        public void TestPublish()
+        public void TestSinglePublish()
         {
             Article Art = new Article();
             Art.Title = "Test1";
-            Art.AuthorID = 0;
-            Art.ArticleIndex = 0;
+            Art.AuthorID = DB.NumArticle;
             Art.Content.Add("123");
             Art.Content.Add("456");
 
@@ -40,6 +39,27 @@ namespace TeamProject.Tests
             Assert.That(DB.DB[0].Title, Is.EqualTo("Test1"));
             Assert.That(DB.DB[0].Content[0], Is.EqualTo("123"));
             Assert.That(DB.DB[0].Content[1], Is.EqualTo("456"));
+        }
+
+        [Test]
+        public void TestPublishes()
+        {
+            Article Art = new Article();
+            Art.Title = "GG3B0";
+            Art.AuthorID = 0;
+            Art.Content.Add("123");
+
+            Article Art2 = new Article();
+            Art2.Title = "Asiagodtone";
+            Art2.AuthorID = 4;
+            Art2.Content.Add("GG");
+            Art2.Content.Add("20FF");
+
+            DB.publish(Art);
+            DB.publish(Art2);
+
+            Assert.That(DB.DB[0].ArticleIndex, Is.EqualTo(0));
+            Assert.That(DB.DB[1].ArticleIndex, Is.EqualTo(1));
         }
 
         //test XXXX

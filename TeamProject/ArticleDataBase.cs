@@ -12,10 +12,11 @@ namespace TeamProject
 
         public int MaxArticle = 100;
         public int NumArticle = 0;
-        public string name;
+        public string name = "";
 
         public void publish(Article Art)
         {
+            Art.ArticleIndex = NumArticle;
             DB[NumArticle] = Art;
             NumArticle += 1;
         }
