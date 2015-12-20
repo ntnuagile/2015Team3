@@ -12,18 +12,7 @@ namespace TeamProject
         public int nowUserQua = 0; 
         private static User[] userDataBase = new User[maxUserQua];
         
-            public int SearchUserAccount(string s_name)
-            {
-                
-                for(int index = 0 ; index < nowUserQua ; ++index)
-                {
-                    if(string.Compare(s_name , userDataBase[index].Account) == 0)
-                    {
-                        return index;
-                    }
-                }
-                return -1;
-            }
+            //註冊介面
             public bool RegisterInterface()
             {
                 User newOne = new User();
@@ -57,6 +46,9 @@ namespace TeamProject
                         Console.WriteLine("Your ID number :");
                         newOne.SetID(Console.ReadLine());
                         AddUser(newOne);
+                        Console.WriteLine();
+                        Console.WriteLine("The account is available now , back to the main page.");
+                        Console.Read();
                         return true;
                     }
                     else
@@ -75,14 +67,47 @@ namespace TeamProject
                 
             }
 
+            private int SearchUserAccount(string s_account)
+            {
+
+                for (int index = 0; index < nowUserQua; ++index)
+                {
+                    if (string.Compare(s_account, userDataBase[index].GetAccount()) == 0)
+                    {
+                        return index;
+                    }
+                }
+                return -1;
+            }
             public void AddUser(User newOne)
             {
                 userDataBase[nowUserQua] = newOne;
                 nowUserQua += 1;
             }
-       
-        
+            
+            //登入時搜尋user資料庫
+            public string IsAccountCorrect(string inputAccount , string inputPassword)
+            {
+                int index;
+                for( index = 0 ; index < nowUserQua ; ++index)
+                {
+                    if(string.Compare(inputAccount , userDataBase[index].GetAccount()) == 0 )
+                    {
+                        if(string.Compare(inputPassword , userDataBase[index].GetPassword()) == 0)
+                        {
+                            return index.ToString();
+                        }
+                        else
+                        {
+                            return "WrongPassword";
+                        }
+                    }
+                }
+                return "NotFound";
+            }
 
+            //丟出某個USER
+            
     }
     
 }
