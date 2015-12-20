@@ -50,8 +50,8 @@ namespace TeamProject.Tests
             Assert.That(DB.DB[1].Title, Is.EqualTo("Asiagodtone"));
 
             Assert.That(DB.DB[0].Content[0], Is.EqualTo("123"));
-            Assert.That(DB.DB[1].Content[1], Is.EqualTo("GG"));
-            Assert.That(DB.DB[1].Content[2], Is.EqualTo("20FF"));
+            Assert.That(DB.DB[1].Content[0], Is.EqualTo("GG"));
+            Assert.That(DB.DB[1].Content[1], Is.EqualTo("20FF"));
         }
 
         //test XXXX
