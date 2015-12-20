@@ -25,6 +25,21 @@ namespace TeamProject
                 Console.WriteLine("<{0}> {1}", i + 1, CategoryList[i].name);
             }
         }
+
+        public int SearchCate(string name)
+        {
+            for(int i=0;i<NumCategory;i+=1)
+            {
+                if (name == CategoryList[i].name)
+                    return i;
+            }
+            return -1;
+        }
+
+        public ArticleDataBase GetADB(int index)
+        {
+            return CategoryList[index];
+        }
     }
 
     
