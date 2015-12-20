@@ -11,11 +11,7 @@ namespace TeamProject
         public string Username { get; set; }//姓名
         public string Password { get; set; }
 
-        public string getuser()
-        {
-            return Username;
-        }
-
+        
         public string Name { get; set; }//暱稱
 
         internal void SetName(string account_name)
@@ -51,5 +47,10 @@ namespace TeamProject
             ID = id_number;
         }
         public bool IsLogin { get; set; }
+
+        internal string GetAccount()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
