@@ -16,8 +16,12 @@ namespace TeamProject.Tests
             UserDataBase tudb = new UserDataBase();
             Assert.That(tudb.nowUserQua, Is.EqualTo(0));
             User newu = new User();
+            newu.SetAccount("GG123");
             tudb.AddUser(newu);
             Assert.That(tudb.nowUserQua, Is.EqualTo(1));
+            User cpyu;
+            tudb.GetUser(out cpyu, 0);
+            Assert.That(cpyu.GetAccount() , Is.EqualTo("GG123"));
         }
     }
 }

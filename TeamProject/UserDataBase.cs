@@ -67,7 +67,7 @@ namespace TeamProject
                 
             }
 
-            private int SearchUserAccount(string s_account)
+            public int SearchUserAccount(string s_account)
             {
 
                 for (int index = 0; index < nowUserQua; ++index)
@@ -103,11 +103,20 @@ namespace TeamProject
                         }
                     }
                 }
+                
                 return "NotFound";
             }
-
+       
             //丟出某個USER
+            public void GetUser(out User srchUser , int index)
+            {
+                srchUser = userDataBase[index];
+            }
             
+            public void SetUser(ref User chatoUser , int index)
+            {
+                userDataBase[index] = chatoUser;
+            }
     }
     
 }
