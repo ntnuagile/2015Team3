@@ -6,12 +6,21 @@ using System.Threading.Tasks;
 
 namespace TeamProject
 {
-    class UserDataBase
+    class UserDatabase
     {
-        const int maxUserQua = 200;
-        public int nowUserQua = 0; 
-        private static User[] userDataBase = new User[maxUserQua];
+        public const int maxUserQuantity = 200;
+        public int nowUserQuantity = 0; 
+        public User[] userDatabase = new User[maxUserQuantity];
         
+	
+		 
+            public void SetUserDatabase()
+            {
+                for(int i=0 ; i < maxUserQuantity ; ++i)
+                {
+                    userDatabase[i] = new User();
+                }
+            }
             //註冊介面
             public bool RegisterInterface()
             {
@@ -19,12 +28,12 @@ namespace TeamProject
                 
                 Console.WriteLine("The Register service:");
                 Console.WriteLine();
-                if(nowUserQua < 100)
+                if(nowUserQuantity < maxUserQuantity)
                 {
                     Console.WriteLine("Please input the Account Name that you want to register:");
                     newOne.SetAccount(Console.ReadLine());
                     Console.WriteLine("Please wait , the system is searching whether the account has been used before.");
-                    while (SearchUserAccount(newOne.GetAccount()) != -1)
+                    while (SearchUser_Account(newOne.GetAccount()) != -1)
                     {
                         Console.WriteLine("The account has been used. Please re-enter a account :");
                         newOne.SetAccount(Console.ReadLine());
@@ -67,12 +76,12 @@ namespace TeamProject
                 
             }
 
-            public int SearchUserAccount(string s_account)
+            public int SearchUser_Account(string s_account)
             {
 
-                for (int index = 0; index < nowUserQua; ++index)
+                for (int index = 0; index <= nowUserQuantity; ++index)
                 {
-                    if (string.Compare(s_account, userDataBase[index].GetAccount()) == 0)
+                    if (string.Compare(s_account, userDatabase[index].GetAccount()) == 0)
                     {
                         return index;
                     }
@@ -81,43 +90,11 @@ namespace TeamProject
             }
             public void AddUser(User newOne)
             {
-                userDataBase[nowUserQua] = newOne;
-                nowUserQua += 1;
+                userDatabase[nowUserQuantity] = newOne;
+                nowUserQuantity += 1;
             }
             
-            //登入時搜尋user資料庫
-            public string IsAccountCorrect(string inputAccount , string inputPassword)
-            {
-                int index;
-                for( index = 0 ; index < nowUserQua ; ++index)
-                {
-                    if(string.Compare(inputAccount , userDataBase[index].GetAccount()) == 0 )
-                    {
-                        if(string.Compare(inputPassword , userDataBase[index].GetPassword()) == 0)
-                        {
-                            return index.ToString();
-                        }
-                        else
-                        {
-                            return "WrongPassword";
-                        }
-                    }
-                }
-                
-                return "NotFound";
-            }
-       
-            //丟出某個USER
-            public void GetUser(out User srchUser , int index)
-            {
-                srchUser = userDataBase[index];
-            }
-            
-            public void SetUser(ref User chatoUser , int index)
-            {
-                userDataBase[index] = chatoUser;
-
-            }
+           
     }
     
 }

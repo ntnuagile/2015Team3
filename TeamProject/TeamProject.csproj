@@ -72,7 +72,7 @@
     <Compile Include="Tests\ReplyDataBase.cs" />
     <Compile Include="Tests\Test1.cs" />
     <Compile Include="Tests\TestUDB.cs" />
-    <Compile Include="UserDataBase.cs" />
+    <Compile Include="UserDatabase.cs" />
     <Compile Include="Reply.cs" />
     <Compile Include="Tests\Sign_in.cs" />
     <Compile Include="User.cs" />
