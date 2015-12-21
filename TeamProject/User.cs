@@ -8,17 +8,6 @@ namespace TeamProject
 {
     class User
     {
-        //姓名
-        private string Username { get; set; }
-        public string GetUser()
-        {
-            return Username;
-        }
-        public void SetUser(string name)
-        {
-            Username = name;
-        }
-
         //暱稱
         private string Name { get; set; }
         internal void SetName(string account_name)
