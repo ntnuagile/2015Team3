@@ -93,6 +93,49 @@ namespace TeamProject
                 userDatabase[nowUserQuantity] = newOne;
                 nowUserQuantity += 1;
             }
+            //確認帳密
+            public bool CheckUserSignIn(String UserAccount, String UserPassword)
+            {
+                int index = SearchUser_Account(UserAccount);
+                if(index!=-1)
+                {
+                    if(string.Compare(userDatabase[index].GetPassword(),UserPassword)==0)
+                    {
+                        
+                        return true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("The Password is wrong!!");
+                        Console.WriteLine("Please check your password.");
+                        return false;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("We can't find this User");
+                    Console.WriteLine("Please check your account.");
+                    return false;
+                }
+            }
+            //登入畫面
+            public void SignIn()
+            {
+                String Account, Password;
+                Console.WriteLine("Please input your Account:");
+                Account=Console.ReadLine();
+                Console.WriteLine("Please input your Password:");
+                Password = Console.ReadLine();
+                if(CheckUserSignIn(Account,Password)==true)
+                {
+                    Console.WriteLine("Welcome back ");
+                }
+                else
+                {
+                    
+                    
+                }
+            }
             
            
     }

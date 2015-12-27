@@ -46,5 +46,16 @@ namespace TeamProject.Tests
             Assert.That(newUDB.SearchUser_Account("bnm321"), Is.EqualTo(1));
 
         }
+        [Test]
+        public void TestCheckUser()
+        {
+            UserDatabase newUDB = new UserDatabase();
+            newUDB.SetUserDatabase();
+            User one = new User();
+            one.SetAccount("kkk123");
+            one.SetPassword("issecret");
+            newUDB.AddUser(one);
+            Assert.That(newUDB.CheckUserSignIn("kkk123", "issecret"), Is.EqualTo(true));
+        }
     }
 }
