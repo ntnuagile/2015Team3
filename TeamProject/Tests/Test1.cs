@@ -69,10 +69,12 @@ namespace TeamProject.Tests
 
             DB.AddArticle(Art1);
             DB.AddArticle(Art2);
+            DB.AddArticle(Art3);
 
             Assert.That(DB.NumArticle, Is.EqualTo(2));
 
             Assert.That(DB.SearchByAuthor(0), Is.EqualTo(0));
+            Assert.That(DB.SearchByAuthor(2), Is.EqualTo(-1));
             Assert.That(DB.SearchByAuthor(4), Is.EqualTo(1));
             Assert.That(DB.SearchByAuthor(5), Is.EqualTo(2));
         }
