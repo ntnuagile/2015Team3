@@ -55,10 +55,11 @@ namespace TeamProject
 
             if (index == -1) return false;
 
-            for (int i = index; i < NumArticle; ++i)
-                DB[i] = DB[i + 1];
+            for (int i = index + 1; i < NumArticle; ++i) 
+                DB[i-1] = DB[i];
 
             NumArticle -= 1;
+            DB.RemoveAt(NumArticle);
             return true;
         }
 
@@ -68,10 +69,11 @@ namespace TeamProject
 
             if (index == -1) return false;
 
-            for (int i = index; i < NumArticle; ++i)
-                DB[i] = DB[i + 1];
+            for (int i = index + 1; i < NumArticle; ++i)
+                DB[i-1] = DB[i];
 
             NumArticle -= 1;
+            DB.RemoveAt(NumArticle);
             return true;
         }
 
