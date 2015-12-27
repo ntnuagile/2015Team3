@@ -77,6 +77,11 @@ namespace TeamProject.Tests
             Assert.That(DB.SearchByAuthor(2), Is.EqualTo(-1));
             Assert.That(DB.SearchByAuthor(4), Is.EqualTo(1));
             Assert.That(DB.SearchByAuthor(5), Is.EqualTo(2));
+
+            Assert.That(DB.SearchByTitle("GG3B0"), Is.EqualTo(0));
+            Assert.That(DB.SearchByTitle("None"), Is.EqualTo(-1));
+            Assert.That(DB.SearchByTitle("Asiagodtone"), Is.EqualTo(1));
+            Assert.That(DB.SearchByTitle("third"), Is.EqualTo(2));
         }
 
 
