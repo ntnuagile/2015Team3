@@ -84,7 +84,45 @@ namespace TeamProject.Tests
             Assert.That(DB.SearchByTitle("third"), Is.EqualTo(2));
         }
 
+        [Test]
+        public void TestRemoveArticle()
+        {
+            ArticleDataBase DB = new ArticleDataBase();
+            Article Art1 = new Article();
+            Article Art2 = new Article();
+            Article Art3 = new Article();
+            Article Art4 = new Article();
 
+            Art1.Title = "GG3B0";
+            Art1.AuthorID = 0;
+            Art1.Content.Add("123");
+
+            Art2.Title = "Asiagodtone";
+            Art2.AuthorID = 4;
+            Art2.Content.Add("GG");
+            Art2.Content.Add("20FF");
+
+            Art3.Title = "third";
+            Art3.AuthorID = 5;
+            Art3.Content.Add("temp");
+
+            Art3.Title = "LOL";
+            Art3.AuthorID = 2;
+            Art3.Content.Add("LOLLOL");
+
+            DB.AddArticle(Art1);
+            DB.AddArticle(Art2);
+            DB.AddArticle(Art3);
+            DB.AddArticle(Art4);
+
+            Assert.That(DB.NumArticle, Is.EqualTo(4));
+
+            Assert.That(DB.RemoveByAuthor(0), Is.EqualTo(true));
+            Assert.That(DB.NumArticle, Is.EqualTo(3));
+            Assert.That(DB.DB[0].Title, Is.EqualTo("Asiagodtone"));
+            Assert.That(DB.DB[0].AuthorID, Is.EqualTo(4));
+
+        }
 
         ReplyDataBase[] RD = new ReplyDataBase[100];
         [Test]

@@ -43,10 +43,29 @@ namespace TeamProject
             return -1;
         }
 
-        /*public bool RemoveByIndex(int index)
+        public bool RemoveByAuthor(int AuthorID)
         {
+            int index = SearchByAuthor(AuthorID);
+
+            if (index == -1) return false;
+
+            for (int i = index; i < NumArticle; ++i)
+                DB[i] = DB[i + 1];
+            
             return true;
-        }*/
+        }
+
+        public bool RemoveByTitle(string Str)
+        {
+            int index = SearchByTitle(Str);
+
+            if (index == -1) return false;
+
+            for (int i = index; i < NumArticle; ++i)
+                DB[i] = DB[i + 1];
+
+            return true;
+        }
 
         //刪除 搜尋 修改..
     }
