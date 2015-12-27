@@ -73,11 +73,13 @@ namespace TeamProject
         {
             Array.Sort(DB, ComparebyTitle);
         }
-        // 修改..
+        
 
-        public int ComparebyTitle(Article lhs, Article rhs)
+        private int ComparebyTitle(Article lhs, Article rhs)
         {
-            return string.Compare(lhs.Title, rhs.Title);
+            return lhs.Title.CompareTo(rhs.Title);
         }
+
+        // 修改..
     }
 }
