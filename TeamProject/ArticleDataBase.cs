@@ -84,6 +84,14 @@ namespace TeamProject
                 return x.Title.CompareTo(y.Title);
             });
         }
+
+        public void SotrByTime()
+        {
+            DB.Sort(delegate(Article x, Article y)
+            {
+                return x.ArticleIndex.CompareTo(y.ArticleIndex);
+            });
+        }
         // 修改..
 
 
