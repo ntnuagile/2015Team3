@@ -51,7 +51,8 @@ namespace TeamProject
 
             for (int i = index; i < NumArticle; ++i)
                 DB[i] = DB[i + 1];
-            
+
+            NumArticle -= 1;
             return true;
         }
 
@@ -64,6 +65,7 @@ namespace TeamProject
             for (int i = index; i < NumArticle; ++i)
                 DB[i] = DB[i + 1];
 
+            NumArticle -= 1;
             return true;
         }
 

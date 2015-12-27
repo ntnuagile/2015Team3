@@ -118,10 +118,24 @@ namespace TeamProject.Tests
             Assert.That(DB.NumArticle, Is.EqualTo(4));
 
             Assert.That(DB.RemoveByAuthor(0), Is.EqualTo(true));
-            Assert.That(DB.NumArticle, Is.EqualTo(3));
             Assert.That(DB.DB[0].Title, Is.EqualTo("Asiagodtone"));
             Assert.That(DB.DB[0].AuthorID, Is.EqualTo(4));
 
+            Assert.That(DB.NumArticle, Is.EqualTo(3));
+
+            Assert.That(DB.RemoveByAuthor(99), Is.EqualTo(false));
+
+            Assert.That(DB.NumArticle, Is.EqualTo(3));
+
+            Assert.That(DB.RemoveByTitle("Asiagodtone"), Is.EqualTo(true));
+            Assert.That(DB.DB[0].Title, Is.EqualTo("third"));
+            Assert.That(DB.DB[0].AuthorID, Is.EqualTo(5));
+
+            Assert.That(DB.NumArticle, Is.EqualTo(2));
+
+            Assert.That(DB.RemoveByTitle("NONE"), Is.EqualTo(false));
+
+            Assert.That(DB.NumArticle, Is.EqualTo(2));
         }
 
         ReplyDataBase[] RD = new ReplyDataBase[100];
