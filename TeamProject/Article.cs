@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TeamProject
 {
-    class Article
+    public class Article
     {
         public string Title;
         public List<string> Content = new List<string>();

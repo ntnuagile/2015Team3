@@ -169,7 +169,6 @@ namespace TeamProject.Tests
             DB.AddArticle(Art3);
             DB.AddArticle(Art4);
 
-            DB.SortByTitle();
 
             Assert.That(DB.DB[0].Title, Is.EqualTo("BBB"));
             Assert.That(DB.DB[1].Title, Is.EqualTo("CCC"));
