@@ -12,10 +12,13 @@ namespace TeamProject
         public int MaxCategory = 100;
         public int NumCategory = 0;
 
-        public void AddCategory(ArticleDataBase db)
+        public bool AddCategory(ArticleDataBase db)
         {
+            if (NumCategory == MaxCategory)
+                return false;
             CategoryList[NumCategory] = db;
             NumCategory += 1;
+            return true;
         }
 
         public void Print()
@@ -39,6 +42,24 @@ namespace TeamProject
         public ArticleDataBase GetADB(int index)
         {
             return CategoryList[index];
+        }
+
+        public void DeleteCate(int index)
+        {
+            for(int i=index;i<NumCategory-1;i+=1)
+            {
+                CategoryList[i] = CategoryList[i + 1];
+            }
+            NumCategory -= 1;
+        }
+        public void DeleteCate(string name)
+        {
+            int i = SearchCate(name);
+            for (; i < NumCategory - 1; i += 1)
+            {
+                CategoryList[i] = CategoryList[i + 1];
+            }
+            NumCategory -= 1;
         }
     }
 
