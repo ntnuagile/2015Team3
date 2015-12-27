@@ -106,9 +106,9 @@ namespace TeamProject.Tests
             Art3.AuthorID = 5;
             Art3.Content.Add("temp");
 
-            Art3.Title = "LOL";
-            Art3.AuthorID = 2;
-            Art3.Content.Add("LOLLOL");
+            Art4.Title = "LOL";
+            Art4.AuthorID = 2;
+            Art4.Content.Add("LOLLOL");
 
             DB.AddArticle(Art1);
             DB.AddArticle(Art2);
