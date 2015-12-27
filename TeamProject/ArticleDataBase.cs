@@ -69,6 +69,15 @@ namespace TeamProject
             return true;
         }
 
-        //刪除 搜尋 修改..
+        public void SortByTitle()
+        {
+            Array.Sort(DB, ComparebyTitle);
+        }
+        // 修改..
+
+        public int ComparebyTitle(Article lhs, Article rhs)
+        {
+            return string.Compare(lhs.Title, rhs.Title);
+        }
     }
 }

@@ -138,6 +138,45 @@ namespace TeamProject.Tests
             Assert.That(DB.NumArticle, Is.EqualTo(2));
         }
 
+        [Test]
+        public void TestSortArticle()
+        {
+            ArticleDataBase DB = new ArticleDataBase();
+            Article Art1 = new Article();
+            Article Art2 = new Article();
+            Article Art3 = new Article();
+            Article Art4 = new Article();
+
+            Art1.Title = "ZZZZ";
+            Art1.AuthorID = 0;
+            Art1.Content.Add("123");
+
+            Art2.Title = "BBB";
+            Art2.AuthorID = 4;
+            Art2.Content.Add("GG");
+            Art2.Content.Add("20FF");
+
+            Art3.Title = "CCC";
+            Art3.AuthorID = 5;
+            Art3.Content.Add("temp");
+
+            Art4.Title = "DDDDD";
+            Art4.AuthorID = 2;
+            Art4.Content.Add("LOLLOL");
+
+            DB.AddArticle(Art1);
+            DB.AddArticle(Art2);
+            DB.AddArticle(Art3);
+            DB.AddArticle(Art4);
+
+            DB.SortByTitle();
+
+            Assert.That(DB.DB[0].Title, Is.EqualTo("BBB"));
+            Assert.That(DB.DB[1].Title, Is.EqualTo("CCC"));
+            Assert.That(DB.DB[2].Title, Is.EqualTo("DDDDD"));
+            Assert.That(DB.DB[3].Title, Is.EqualTo("ZZZZ"));
+        }
+
         ReplyDataBase[] RD = new ReplyDataBase[100];
         [Test]
         public void PushReplay()
