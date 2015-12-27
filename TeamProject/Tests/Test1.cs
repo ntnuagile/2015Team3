@@ -10,36 +10,27 @@ namespace TeamProject.Tests
     [TestFixture]
     public class Test1
     {
-        //因為所有東西都是存在記憶體內 所以所有Test都得放在一起
-
-        //不然註冊完的test之後 登入的test是看不到註冊的內容的
-
-        //test 註冊
-
-        //test 登入
-
-        //test OOOO
-
-        //test 發文
-        ArticleDataBase DB = new ArticleDataBase();
-       
 
         [Test]
-        public void TestPublishes()
-        {
+        public void TestAddArticle()
+        {   
+            ArticleDataBase DB = new ArticleDataBase();
             Article Art = new Article();
+            Article Art2 = new Article();
+
             Art.Title = "GG3B0";
             Art.AuthorID = 0;
             Art.Content.Add("123");
 
-            Article Art2 = new Article();
             Art2.Title = "Asiagodtone";
             Art2.AuthorID = 4;
             Art2.Content.Add("GG");
             Art2.Content.Add("20FF");
 
-            DB.publish(Art);
-            DB.publish(Art2);
+            DB.AddArticle(Art);
+            DB.AddArticle(Art2);
+
+            Assert.That(DB.NumArticle, Is.EqualTo(2));
 
             Assert.That(DB.DB[0].ArticleIndex, Is.EqualTo(0));
             Assert.That(DB.DB[1].ArticleIndex, Is.EqualTo(1));
@@ -54,6 +45,38 @@ namespace TeamProject.Tests
             Assert.That(DB.DB[1].Content[0], Is.EqualTo("GG"));
             Assert.That(DB.DB[1].Content[1], Is.EqualTo("20FF"));
         }
+
+        [Test]
+        public void TestSearchArticle()
+        {
+            ArticleDataBase DB = new ArticleDataBase();
+            Article Art1 = new Article();
+            Article Art2 = new Article();
+            Article Art3 = new Article();
+
+            Art1.Title = "GG3B0";
+            Art1.AuthorID = 0;
+            Art1.Content.Add("123");
+
+            Art2.Title = "Asiagodtone";
+            Art2.AuthorID = 4;
+            Art2.Content.Add("GG");
+            Art2.Content.Add("20FF");
+
+            Art3.Title = "third";
+            Art3.AuthorID = 5;
+            Art3.Content.Add("temp");
+
+            DB.AddArticle(Art1);
+            DB.AddArticle(Art2);
+
+            Assert.That(DB.NumArticle, Is.EqualTo(2));
+
+            Assert.That(DB.SearchByAuthor(0), Is.EqualTo(0));
+            Assert.That(DB.SearchByAuthor(4), Is.EqualTo(1));
+            Assert.That(DB.SearchByAuthor(5), Is.EqualTo(2));
+        }
+
 
 
         ReplyDataBase[] RD = new ReplyDataBase[100];

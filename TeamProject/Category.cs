@@ -22,7 +22,7 @@ namespace TeamProject
         {
             for(int i=0;i<NumCategory;i+=1)
             {
-                Console.WriteLine("<{0}> {1}", i + 1, CategoryList[i].name);
+                Console.WriteLine("<{0}> {1}", i + 1, CategoryList[i].BlockName);
             }
         }
 
@@ -30,7 +30,7 @@ namespace TeamProject
         {
             for(int i=0;i<NumCategory;i+=1)
             {
-                if (name == CategoryList[i].name)
+                if (name == CategoryList[i].BlockName)
                     return i;
             }
             return -1;
