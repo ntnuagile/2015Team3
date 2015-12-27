@@ -71,7 +71,7 @@ namespace TeamProject.Tests
             DB.AddArticle(Art2);
             DB.AddArticle(Art3);
 
-            Assert.That(DB.NumArticle, Is.EqualTo(2));
+            Assert.That(DB.NumArticle, Is.EqualTo(3));
 
             Assert.That(DB.SearchByAuthor(0), Is.EqualTo(0));
             Assert.That(DB.SearchByAuthor(2), Is.EqualTo(-1));
