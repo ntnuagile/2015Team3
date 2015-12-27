@@ -169,11 +169,12 @@ namespace TeamProject.Tests
             DB.AddArticle(Art3);
             DB.AddArticle(Art4);
 
+            DB.SotrByTitle();
 
-            Assert.That(DB.DB[0].Title, Is.EqualTo("ZZZZ"));
-            Assert.That(DB.DB[1].Title, Is.EqualTo("BBB"));
-            Assert.That(DB.DB[2].Title, Is.EqualTo("CCC"));
-            Assert.That(DB.DB[3].Title, Is.EqualTo("DDDDD"));
+            Assert.That(DB.DB[0].Title, Is.EqualTo("BBB"));
+            Assert.That(DB.DB[1].Title, Is.EqualTo("CCC"));
+            Assert.That(DB.DB[2].Title, Is.EqualTo("DDDDD"));
+            Assert.That(DB.DB[3].Title, Is.EqualTo("ZZZZ"));
         }
 
         ReplyDataBase[] RD = new ReplyDataBase[100];

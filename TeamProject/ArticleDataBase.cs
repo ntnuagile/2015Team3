@@ -77,7 +77,15 @@ namespace TeamProject
             return true;
         }
 
-
+        public void SotrByTitle()
+        {
+            DB.Sort(delegate(Article x, Article y)
+            {
+                return x.Title.CompareTo(y.Title);
+            });
+        }
         // 修改..
+
+
     }
 }

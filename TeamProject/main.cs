@@ -16,7 +16,7 @@ namespace TeamProject
             Console.WriteLine("2. Sign in");
             Console.WriteLine("3. Exit");
 
-           /* ArticleDataBase DB = new ArticleDataBase();
+            /*ArticleDataBase DB = new ArticleDataBase();
             Article Art1 = new Article();
             Article Art2 = new Article();
             Article Art3 = new Article();
@@ -44,6 +44,7 @@ namespace TeamProject
             DB.AddArticle(Art3);
             DB.AddArticle(Art4);
 
+            DB.SotrByTitle();
 
             string a = DB.DB[0].Title;
             string b = DB.DB[1].Title;
