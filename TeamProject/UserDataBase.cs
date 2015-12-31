@@ -20,17 +20,33 @@ namespace TeamProject
                 }
             }
             //註冊
-            public void SetANewUser(string account,string name,char gender,string password,string birth, string id)
+            public bool SetANewUser(string account,string name,char gender,string password,string birth, string id,bool pass)
             {
-                User newOne = new User();
-                newOne.SetAccount(account);
-                newOne.SetName(name);
-                newOne.SetGender(gender);
-                password = GetMD5(password);
-                newOne.SetPassword(password);
-                newOne.SetBirth(birth);
-                newOne.SetID(id);
-                AddUser(newOne);
+                if(pass == true)
+                {
+                    User newOne = new User();
+                    newOne.SetAccount(account);
+                    newOne.SetName(name);
+                    newOne.SetGender(gender);
+                    password = GetMD5(password);
+                    newOne.SetPassword(password);
+                    newOne.SetBirth(birth);
+                    newOne.SetID(id);
+                    AddUser(newOne);
+                    return true;
+                }
+                return false;
+            }
+            public bool IsAccountAvaliable(string account)
+            {
+                for(int i=0 ; i<nowUserQuantity ; ++i)
+                {
+                    if(string.Compare(account , userDatabase[i].GetAccount()) == 0)
+                    {
+                        return false;
+                    }
+                }
+                return true;
             }
             public string GetMD5(string text)
             {

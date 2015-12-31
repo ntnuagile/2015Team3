@@ -36,7 +36,7 @@ namespace TeamProject.Tests
             //Test SearchUser_Account()
             Assert.That(newUDB.SearchUser_Account("jj123"), Is.EqualTo(0));
             //Test SetANewUser()
-            newUDB.SetANewUser("asdzxc", "balabala", 'M', "987654321", "2015/12/31", "A123456789");
+            newUDB.SetANewUser("asdzxc", "balabala", 'M', "987654321", "2015/12/31", "A123456789",newUDB.IsAccountAvaliable("asdzxc"));
             Assert.That(newUDB.nowUserQuantity, Is.EqualTo(2));
             Assert.That(newUDB.userDatabase[1].GetAccount(), Is.EqualTo("asdzxc"));
             Assert.That(newUDB.userDatabase[1].GetBirth(), Is.EqualTo("2015/12/31"));
