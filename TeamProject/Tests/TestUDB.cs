@@ -23,18 +23,10 @@ namespace TeamProject.Tests
             addOne.SetGender('M');
             addOne.SetID("E123456789");
             addOne.SetName("Jackeeeeeee");
-            addOne.SetPassword("asdzxc123");
+            addOne.SetPassword(newUDB.GetMD5("asdzxc123"));
             newUDB.AddUser(addOne);
-            User addTwo = new User();
-            addTwo.SetAccount("bnm321");
-            addTwo.SetBirth("1996/05/01");
-            addTwo.SetGender('F');
-            addTwo.SetID("F123456789");
-            addTwo.SetName("Backeeeeeee");
-            addTwo.SetPassword("Asdzxc123");
-            newUDB.AddUser(addTwo);
             //Test AddUser() 
-            Assert.That(newUDB.nowUserQuantity, Is.EqualTo(2));
+            Assert.That(newUDB.nowUserQuantity, Is.EqualTo(1));
             Assert.That(newUDB.userDatabase[0].GetAccount(), Is.EqualTo(addOne.GetAccount()));
             Assert.That(newUDB.userDatabase[0].GetBirth(), Is.EqualTo(addOne.GetBirth()));
             Assert.That(newUDB.userDatabase[0].GetGender(), Is.EqualTo(addOne.GetGender()));
@@ -43,9 +35,18 @@ namespace TeamProject.Tests
             Assert.That(newUDB.userDatabase[0].GetPassword(), Is.EqualTo(addOne.GetPassword()));
             //Test SearchUser_Account()
             Assert.That(newUDB.SearchUser_Account("jj123"), Is.EqualTo(0));
-            Assert.That(newUDB.SearchUser_Account("bnm321"), Is.EqualTo(1));
-
+            //Test SetANewUser()
+            newUDB.SetANewUser("asdzxc", "balabala", 'M', "987654321", "2015/12/31", "A123456789");
+            Assert.That(newUDB.nowUserQuantity, Is.EqualTo(2));
+            Assert.That(newUDB.userDatabase[1].GetAccount(), Is.EqualTo("asdzxc"));
+            Assert.That(newUDB.userDatabase[1].GetBirth(), Is.EqualTo("2015/12/31"));
+            Assert.That(newUDB.userDatabase[1].GetGender(), Is.EqualTo('M'));
+            Assert.That(newUDB.userDatabase[1].GetID(), Is.EqualTo("A123456789"));
+            Assert.That(newUDB.userDatabase[1].GetName(), Is.EqualTo("balabala"));
+            Assert.That(newUDB.userDatabase[1].GetPassword(), Is.EqualTo(newUDB.GetMD5("987654321")));
         }
+
+        
         [Test]
         public void TestCheckUser()
         {
@@ -53,7 +54,7 @@ namespace TeamProject.Tests
             newUDB.SetUserDatabase();
             User one = new User();
             one.SetAccount("kkk123");
-            one.SetPassword("issecret");
+            one.SetPassword(newUDB.GetMD5("issecret"));
             newUDB.AddUser(one);
             Assert.That(newUDB.CheckUserSignIn("kkk123", "issecret"), Is.EqualTo(true));
         }

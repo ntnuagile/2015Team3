@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Security;
+using System.Security.Cryptography;
 namespace TeamProject
 {
     class UserDatabase
@@ -11,71 +12,38 @@ namespace TeamProject
         public const int maxUserQuantity = 200;
         public int nowUserQuantity = 0; 
         public User[] userDatabase = new User[maxUserQuantity];
-        
-	
-		 
             public void SetUserDatabase()
             {
-                for(int i=0 ; i < maxUserQuantity ; ++i)
+                for(int i=0 ; i <maxUserQuantity ; ++i)
                 {
                     userDatabase[i] = new User();
                 }
             }
-            //註冊介面
-            public bool RegisterInterface()
+            //註冊
+            public void SetANewUser(string account,string name,char gender,string password,string birth, string id)
             {
                 User newOne = new User();
-                
-                Console.WriteLine("The Register service:");
-                Console.WriteLine();
-                if(nowUserQuantity < maxUserQuantity)
-                {
-                    Console.WriteLine("Please input the Account Name that you want to register:");
-                    newOne.SetAccount(Console.ReadLine());
-                    Console.WriteLine("Please wait , the system is searching whether the account has been used before.");
-                    while (SearchUser_Account(newOne.GetAccount()) != -1)
-                    {
-                        Console.WriteLine("The account has been used. Please re-enter a account :");
-                        newOne.SetAccount(Console.ReadLine());
-                    }
-                    Console.WriteLine("The name is available , do you want to create your account?(Y/N)");
-                    Console.WriteLine("If you press N , than you will back to the main page :");
-
-                    if (Console.ReadLine()[0] == 'Y')
-                    {
-                        Console.WriteLine("Now, please input the following information :");
-                        Console.WriteLine("Your nickname: ");
-                        newOne.SetName(Console.ReadLine());
-                        Console.WriteLine("Your gender (M/F): ");
-                        newOne.SetGender(Console.ReadLine()[0]);
-                        Console.WriteLine("Your password :");
-                        newOne.SetPassword(Console.ReadLine());
-                        Console.WriteLine("Your Birth (XXXX/XX/XX):");
-                        newOne.SetBirth(Console.ReadLine());
-                        Console.WriteLine("Your ID number :");
-                        newOne.SetID(Console.ReadLine());
-                        AddUser(newOne);
-                        Console.WriteLine();
-                        Console.WriteLine("The account is available now , back to the main page.");
-                        Console.Read();
-                        return true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Now, back to the main page.");
-                        Console.Read();
-                        return false;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("The user quantity reached the limit , back to the main page.");
-                    Console.Read();
-                    return false;
-                }
-                
+                newOne.SetAccount(account);
+                newOne.SetName(name);
+                newOne.SetGender(gender);
+                password = GetMD5(password);
+                newOne.SetPassword(password);
+                newOne.SetBirth(birth);
+                newOne.SetID(id);
+                AddUser(newOne);
             }
-
+            public string GetMD5(string text)
+            {
+                MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+                md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(text));
+                byte[] result = md5.Hash;
+                StringBuilder str = new StringBuilder(32);
+                for (int i = 0; i < result.Length; i++)
+                {
+                    str.Append(result[i].ToString("X2").ToLower());
+                }
+                return str.ToString();
+            }
             public int SearchUser_Account(string s_account)
             {
 
@@ -99,7 +67,7 @@ namespace TeamProject
                 int index = SearchUser_Account(UserAccount);
                 if(index!=-1)
                 {
-                    if(string.Compare(userDatabase[index].GetPassword(),UserPassword)==0)
+                    if(string.Compare(userDatabase[index].GetPassword(),GetMD5(UserPassword))==0)
                     {
                         
                         return true;
