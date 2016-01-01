@@ -65,7 +65,7 @@ namespace TeamProject
 
                 for (int index = 0; index <= nowUserQuantity; ++index)
                 {
-                    if (string.Compare(s_account, userDatabase[index].GetAccount()) == 0)
+                     if (string.Compare(s_account, userDatabase[index].GetAccount()) == 0)
                     {
                         return index;
                     }
