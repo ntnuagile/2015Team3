@@ -85,6 +85,7 @@ namespace TeamProject
                 {
                     if(userDatabase[index].GetPassword()==password)
                     {
+                        userDatabase[index].IsLogin = true;
                         return index;
                     }
                 }

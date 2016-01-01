@@ -81,7 +81,7 @@ namespace TeamProject
 
 
         //登入狀態
-        public bool IsLogin { get; private set; }
+        public bool IsLogin { get; set; }
 
     }
 }
