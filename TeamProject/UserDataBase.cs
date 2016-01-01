@@ -102,24 +102,7 @@ namespace TeamProject
                     return false;
                 }
             }
-            //登入畫面
-            public void SignIn()
-            {
-                String Account, Password;
-                Console.WriteLine("Please input your Account:");
-                Account=Console.ReadLine();
-                Console.WriteLine("Please input your Password:");
-                Password = Console.ReadLine();
-                if(CheckUserSignIn(Account,Password)==true)
-                {
-                    Console.WriteLine("Welcome back ");
-                }
-                else
-                {
-                    
-                    
-                }
-            }
+           
             
            
     }
