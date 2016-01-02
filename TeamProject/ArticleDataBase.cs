@@ -10,72 +10,90 @@ namespace TeamProject
     {
         public List<Article> DB = new List<Article>();
 
-        Article[] ee = new Article[100];
-
         public int MaxArticle = 100;
         public int NumArticle = 0;
-        public int ArticleIndex = 0; //sort時使用
+        public int ArticleIndex = 0; //文章編號
         public string BlockName = "";
 
-        public void AddArticle(Article Art)
+        public bool AddArticle(User U, string Title, List<string> Content)
         {
-            Article tmp = new Article();
+            if (U.IsLogin == false) return false;
+            if (NumArticle >= MaxArticle) return false;
 
-            tmp = Art;
-            tmp.ArticleIndex = ArticleIndex;
-            DB.Add(tmp);
+            Article Art = new Article();
+
+            Art.AuthorAccount = U.GetAccount();
+            Art.ArticleIndex = ArticleIndex;
+            Art.Title = Title;
+            Art.Content = Content;
+
+            U.ArticleID.Add(ArticleIndex);
+            U.NumArticle += 1;
+
+            DB.Add(Art);
 
             ArticleIndex += 1;
             NumArticle += 1;
+
+            return true;
         }
 
-        public int SearchByAuthor(int AuthorID)
+        //Search
+
+        public List<int> SearchByAuthor(string AuthorAccount)
         {
+            List<int> Index = new List<int>();
+
             for (int i = 0; i < NumArticle; ++i)
             {
-                if (DB[i].AuthorID == AuthorID)
-                    return i;
+                if (DB[i].AuthorAccount == AuthorAccount)
+                    Index.Add(DB[i].ArticleIndex);
             }
-            return -1;
+            return Index;
         }
 
-        public int SearchByTitle(string Str)
+        public List<int> SearchByTitle(string Str)
         {
+            List<int> Index = new List<int>();
+
             for (int i = 0; i < NumArticle; ++i)
             {
                 if (DB[i].Title == Str)
-                    return i;
+                    Index.Add(DB[i].ArticleIndex);
             }
-            return -1;
+            return Index;
         }
 
-        public bool RemoveByAuthor(int AuthorID)
+        // Remove
+
+        public bool RemoveArticle(User U, string Title)
         {
-            int index = SearchByAuthor(AuthorID);
+            if (U.IsLogin == false) return false;
 
-            if (index == -1) return false;
+            int Index = -1;
+            int ArticleIndex = 0;
 
-            for (int i = index + 1; i < NumArticle; ++i) 
-                DB[i-1] = DB[i];
+            for (int i = 0; i < NumArticle; i++)
+            {
+                if (DB[i].AuthorAccount == U.GetAccount() && DB[i].Title == Title)
+                {
+                    Index = i;
+                    ArticleIndex = DB[i].ArticleIndex;
+                }
+            }
 
+            if (Index == -1) return false;  //沒找到
+
+            DB.RemoveAt(Index);
             NumArticle -= 1;
-            DB.RemoveAt(NumArticle);
+
+            U.ArticleID.Remove(ArticleIndex);
+            U.NumArticle -= 1;
+
             return true;
         }
 
-        public bool RemoveByTitle(string Str)
-        {
-            int index = SearchByTitle(Str);
-
-            if (index == -1) return false;
-
-            for (int i = index + 1; i < NumArticle; ++i)
-                DB[i-1] = DB[i];
-
-            NumArticle -= 1;
-            DB.RemoveAt(NumArticle);
-            return true;
-        }
+        //Sort
 
         public void SotrByTitle()
         {

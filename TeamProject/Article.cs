@@ -8,9 +8,12 @@ namespace TeamProject
 {
     public class Article
     {
-        public string Title;
-        public List<string> Content = new List<string>();
-        public int AuthorID;
         public int ArticleIndex;
+        public string Title;
+        public string AuthorAccount;
+        public List<string> Content = new List<string>();
+
+        public int GoodPoint = 0;
+        public int BadPoint = 0;
     }
 }

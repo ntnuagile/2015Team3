@@ -81,7 +81,11 @@ namespace TeamProject
 
 
         //登入狀態
-        public bool IsLogin = false; 
+        public bool IsLogin = false;
+
+        //給Article用的
+        public int NumArticle = 0;
+        public List<int> ArticleID = new List<int>();
 
     }
 }

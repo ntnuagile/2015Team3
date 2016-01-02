@@ -13,131 +13,150 @@ namespace TeamProject.Tests
 
         [Test]
         public void TestAddArticle()
-        {   
+        {
             ArticleDataBase DB = new ArticleDataBase();
-            Article Art = new Article();
-            Article Art2 = new Article();
 
-            Art.Title = "GG3B0";
-            Art.AuthorID = 0;
-            Art.Content.Add("123");
+            User newU1 = new User();
+            newU1.IsLogin = true;
+            newU1.SetAccount("mistake");
 
-            Art2.Title = "Asiagodtone";
-            Art2.AuthorID = 4;
-            Art2.Content.Add("GG");
-            Art2.Content.Add("20FF");
+            User newU2 = new User();
+            newU2.IsLogin = false;
+            newU2.SetAccount("bebe");
 
-            DB.AddArticle(Art);
-            DB.AddArticle(Art2);
+            List<string> Content1 = new List<string>();
+            List<string> Content2 = new List<string>();
+            List<string> Content3 = new List<string>();
+
+            Content1.Add("123");
+            Content2.Add("GG");
+            Content2.Add("20FF");
+            Content3.Add("GGG");
+
+            DB.AddArticle(newU1, "GG3B0", Content1);
+            DB.AddArticle(newU2, "Asiagodtone", Content2);
+
+            Assert.That(DB.NumArticle, Is.EqualTo(1));
+            Assert.That(DB.DB[0].ArticleIndex, Is.EqualTo(0));
+            Assert.That(DB.DB[0].AuthorAccount, Is.EqualTo("mistake"));
+            Assert.That(DB.DB[0].Title, Is.EqualTo("GG3B0"));
+            Assert.That(DB.DB[0].Content[0], Is.EqualTo("123"));
+            Assert.That(newU1.NumArticle, Is.EqualTo(1));
+            Assert.That(newU1.ArticleID[0], Is.EqualTo(0));
+
+            newU2.IsLogin = true;
+            DB.AddArticle(newU2, "Asiagodtone", Content2);
 
             Assert.That(DB.NumArticle, Is.EqualTo(2));
-
-            Assert.That(DB.DB[0].ArticleIndex, Is.EqualTo(0));
             Assert.That(DB.DB[1].ArticleIndex, Is.EqualTo(1));
-
-            Assert.That(DB.DB[0].AuthorID, Is.EqualTo(0));
-            Assert.That(DB.DB[1].AuthorID, Is.EqualTo(4));
-
-            Assert.That(DB.DB[0].Title, Is.EqualTo("GG3B0"));
+            Assert.That(DB.DB[1].AuthorAccount, Is.EqualTo("bebe"));
             Assert.That(DB.DB[1].Title, Is.EqualTo("Asiagodtone"));
-
-            Assert.That(DB.DB[0].Content[0], Is.EqualTo("123"));
             Assert.That(DB.DB[1].Content[0], Is.EqualTo("GG"));
             Assert.That(DB.DB[1].Content[1], Is.EqualTo("20FF"));
+            Assert.That(newU2.NumArticle, Is.EqualTo(1));
+            Assert.That(newU2.ArticleID[0], Is.EqualTo(1));
+
+            DB.AddArticle(newU1, "TPA", Content3);
+
+            Assert.That(DB.NumArticle, Is.EqualTo(3));
+            Assert.That(newU1.NumArticle, Is.EqualTo(2));
+            Assert.That(newU1.ArticleID[0], Is.EqualTo(0));
+            Assert.That(newU1.ArticleID[1], Is.EqualTo(2));
         }
+
 
         [Test]
         public void TestSearchArticle()
         {
             ArticleDataBase DB = new ArticleDataBase();
-            Article Art1 = new Article();
-            Article Art2 = new Article();
-            Article Art3 = new Article();
 
-            Art1.Title = "GG3B0";
-            Art1.AuthorID = 0;
-            Art1.Content.Add("123");
+            User newU1 = new User();
+            newU1.IsLogin = true;
+            newU1.SetAccount("mistake");
 
-            Art2.Title = "Asiagodtone";
-            Art2.AuthorID = 4;
-            Art2.Content.Add("GG");
-            Art2.Content.Add("20FF");
+            User newU2 = new User();
+            newU2.IsLogin = true;
+            newU2.SetAccount("bebe");
 
-            Art3.Title = "third";
-            Art3.AuthorID = 5;
-            Art3.Content.Add("temp");
+            List<string> Content1 = new List<string>();
+            List<string> Content2 = new List<string>();
+            List<string> Content3 = new List<string>();
 
-            DB.AddArticle(Art1);
-            DB.AddArticle(Art2);
-            DB.AddArticle(Art3);
+            Content1.Add("123");
+            Content2.Add("456");
+            Content3.Add("789");
+
+            DB.AddArticle(newU1, "GG3B0", Content1);
+            DB.AddArticle(newU2, "GG3B0", Content2);
+            DB.AddArticle(newU1, "TPA", Content3);
 
             Assert.That(DB.NumArticle, Is.EqualTo(3));
 
-            Assert.That(DB.SearchByAuthor(0), Is.EqualTo(0));
-            Assert.That(DB.SearchByAuthor(2), Is.EqualTo(-1));
-            Assert.That(DB.SearchByAuthor(4), Is.EqualTo(1));
-            Assert.That(DB.SearchByAuthor(5), Is.EqualTo(2));
+            List<int> search = new List<int>();
 
-            Assert.That(DB.SearchByTitle("GG3B0"), Is.EqualTo(0));
-            Assert.That(DB.SearchByTitle("None"), Is.EqualTo(-1));
-            Assert.That(DB.SearchByTitle("Asiagodtone"), Is.EqualTo(1));
-            Assert.That(DB.SearchByTitle("third"), Is.EqualTo(2));
+            search = DB.SearchByAuthor("mistake");
+            Assert.That(search.Count, Is.EqualTo(2));
+            Assert.That(search[0], Is.EqualTo(0));
+            Assert.That(search[1], Is.EqualTo(2));
+
+            search = DB.SearchByAuthor("mistake2");
+            Assert.That(search.Count, Is.EqualTo(0));
+
+            search = DB.SearchByAuthor("bebe");
+            Assert.That(search.Count, Is.EqualTo(1));
+            Assert.That(search[0], Is.EqualTo(1));
+
+            search = DB.SearchByAuthor("GG3B0");
+            Assert.That(search.Count, Is.EqualTo(2));
+            Assert.That(search[0], Is.EqualTo(0));
+            Assert.That(search[1], Is.EqualTo(1));
+
+            search = DB.SearchByAuthor("None");
+            Assert.That(search.Count, Is.EqualTo(0));
         }
+
 
         [Test]
         public void TestRemoveArticle()
         {
             ArticleDataBase DB = new ArticleDataBase();
-            Article Art1 = new Article();
-            Article Art2 = new Article();
-            Article Art3 = new Article();
-            Article Art4 = new Article();
 
-            Art1.Title = "GG3B0";
-            Art1.AuthorID = 0;
-            Art1.Content.Add("123");
+            User newU1 = new User();
+            newU1.IsLogin = true;
+            newU1.SetAccount("mistake");
 
-            Art2.Title = "Asiagodtone";
-            Art2.AuthorID = 4;
-            Art2.Content.Add("GG");
-            Art2.Content.Add("20FF");
+            User newU2 = new User();
+            newU2.IsLogin = true;
+            newU2.SetAccount("bebe");
 
-            Art3.Title = "third";
-            Art3.AuthorID = 5;
-            Art3.Content.Add("temp");
+            List<string> Content1 = new List<string>();
+            List<string> Content2 = new List<string>();
+            List<string> Content3 = new List<string>();
 
-            Art4.Title = "LOL";
-            Art4.AuthorID = 2;
-            Art4.Content.Add("LOLLOL");
+            Content1.Add("123");
+            Content2.Add("456");
+            Content3.Add("789");
 
-            DB.AddArticle(Art1);
-            DB.AddArticle(Art2);
-            DB.AddArticle(Art3);
-            DB.AddArticle(Art4);
-
-            Assert.That(DB.NumArticle, Is.EqualTo(4));
-
-            Assert.That(DB.RemoveByAuthor(0), Is.EqualTo(true));
-            Assert.That(DB.DB[0].Title, Is.EqualTo("Asiagodtone"));
-            Assert.That(DB.DB[0].AuthorID, Is.EqualTo(4));
+            DB.AddArticle(newU1, "GG3B0", Content1);
+            DB.AddArticle(newU2, "GG3B0", Content2);
+            DB.AddArticle(newU1, "TPA", Content3);
 
             Assert.That(DB.NumArticle, Is.EqualTo(3));
-
-            Assert.That(DB.RemoveByAuthor(99), Is.EqualTo(false));
-
-            Assert.That(DB.NumArticle, Is.EqualTo(3));
-
-            Assert.That(DB.RemoveByTitle("Asiagodtone"), Is.EqualTo(true));
-            Assert.That(DB.DB[0].Title, Is.EqualTo("third"));
-            Assert.That(DB.DB[0].AuthorID, Is.EqualTo(5));
-
+            Assert.That(DB.RemoveArticle(newU1, "GG3B0"), Is.EqualTo(true));
+            Assert.That(DB.DB[0].Title, Is.EqualTo("GG3B0"));
+            Assert.That(DB.DB[0].AuthorAccount, Is.EqualTo("bebe"));
+            Assert.That(newU1.NumArticle, Is.EqualTo(1));
+            Assert.That(newU1.ArticleID[0], Is.EqualTo(2));
             Assert.That(DB.NumArticle, Is.EqualTo(2));
 
-            Assert.That(DB.RemoveByTitle("NONE"), Is.EqualTo(false));
+            Assert.That(DB.RemoveArticle(newU2, "TPA"), Is.EqualTo(false));
+            Assert.That(DB.NumArticle, Is.EqualTo(2));
 
+            Assert.That(DB.RemoveArticle(newU2, "GG3B1"), Is.EqualTo(false));
             Assert.That(DB.NumArticle, Is.EqualTo(2));
         }
 
+        /*
         [Test]
         public void TestSortArticle()
         {
@@ -148,20 +167,20 @@ namespace TeamProject.Tests
             Article Art4 = new Article();
 
             Art1.Title = "ZZZZ";
-            Art1.AuthorID = 0;
+            Art1.AuthorAccount = "0";
             Art1.Content.Add("123");
 
             Art2.Title = "BBB";
-            Art2.AuthorID = 4;
+            Art2.AuthorAccount = "4";
             Art2.Content.Add("GG");
             Art2.Content.Add("20FF");
 
             Art3.Title = "CCC";
-            Art3.AuthorID = 5;
+            Art3.AuthorAccount = "5";
             Art3.Content.Add("temp");
 
             Art4.Title = "DDDDD";
-            Art4.AuthorID = 2;
+            Art4.AuthorAccount = "2";
             Art4.Content.Add("LOLLOL");
 
             DB.AddArticle(Art1);
@@ -182,7 +201,8 @@ namespace TeamProject.Tests
             Assert.That(DB.DB[1].Title, Is.EqualTo("BBB"));
             Assert.That(DB.DB[2].Title, Is.EqualTo("CCC"));
             Assert.That(DB.DB[3].Title, Is.EqualTo("DDDDD"));
-        }
+        }*/
+
 
         ReplyDataBase[] RD = new ReplyDataBase[100];
         [Test]
