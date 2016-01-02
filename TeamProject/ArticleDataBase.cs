@@ -10,8 +10,8 @@ namespace TeamProject
     {
         public List<Article> DB = new List<Article>();
 
-        public int MaxArticle = 100;
-        public int NumArticle = 0;
+        public int MaxArticle = 100; //最大文章量
+        public int NumArticle = 0;   //文章數量
         public int ArticleIndex = 0; //文章編號
         public string BlockName = "";
 
