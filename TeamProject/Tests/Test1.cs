@@ -136,7 +136,7 @@ namespace TeamProject.Tests
 
             Content1.Add("123");
             Content2.Add("456");
-            Content3.Add("789")
+            Content3.Add("789");
             Content4.Add("aaaa");
 
             DB.AddArticle(newU1, "GG3B0", Content1);
