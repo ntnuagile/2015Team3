@@ -158,6 +158,12 @@ namespace TeamProject.Tests
             DB.AddArticle(newU1, "TPS", Content4);
 
             Assert.That(DB.NumArticle, Is.EqualTo(4));
+
+            newU1.IsLogin = false;
+            Assert.That(DB.RemoveArticle(newU1, DB.DB[0]), Is.EqualTo(false));
+            Assert.That(DB.NumArticle, Is.EqualTo(4));
+
+            newU1.IsLogin = true;
             Assert.That(DB.RemoveArticle(newU1, DB.DB[0]), Is.EqualTo(true));
             Assert.That(DB.NumArticle, Is.EqualTo(3));
             Assert.That(DB.DB[0].Title, Is.EqualTo("GG3B0"));
@@ -201,6 +207,10 @@ namespace TeamProject.Tests
             DB.AddArticle(newU1, "SKT", Content1);
             DB.AddArticle(newU1, "TPA", Content2);
 
+            newU1.IsLogin = false;
+            Assert.That(DB.ModifyArticle(newU1, DB.DB[0], "TPS", Content2), Is.EqualTo(false));
+
+            newU1.IsLogin = true;
             Assert.That(DB.ModifyArticle(newU1, DB.DB[0], "TPS", Content2), Is.EqualTo(true));
             Assert.That(DB.DB[0].Title, Is.EqualTo("TPS"));
             Assert.That(DB.DB[0].Content.Count, Is.EqualTo(3));
