@@ -66,7 +66,36 @@ namespace TeamProject
 
         // Remove
 
-        public bool RemoveArticle(User U, string Title)
+        public bool RemoveArticle(User U, Article Art)
+        {
+            if (U.IsLogin == false) return false;
+            if (U.GetAccount() != Art.AuthorAccount) return false;
+
+            int Index = -1;
+
+            for (int i = 0; i < NumArticle; i++)
+            {
+                if (DB[i].ArticleIndex == Art.ArticleIndex)
+                {
+                    Index = i;
+                    break;
+                }
+            }
+
+            if (Index == -1) return false;  //沒找到
+
+            DB.RemoveAt(Index);
+            NumArticle -= 1;
+
+            U.ArticleID.Remove(Art.ArticleIndex);
+            U.NumArticle -= 1;
+
+            return true;
+        }
+
+
+        // 修改..
+        public bool ModifyArticle(User U, string Title, string NewTitle, List<string> NewContent)
         {
             if (U.IsLogin == false) return false;
 
@@ -110,8 +139,6 @@ namespace TeamProject
                 return x.ArticleIndex.CompareTo(y.ArticleIndex);
             });
         }
-        // 修改..
-
 
     }
 }

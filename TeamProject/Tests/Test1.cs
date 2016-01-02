@@ -145,7 +145,7 @@ namespace TeamProject.Tests
             DB.AddArticle(newU1, "TPS", Content4);
 
             Assert.That(DB.NumArticle, Is.EqualTo(4));
-            Assert.That(DB.RemoveArticle(newU1, "GG3B0"), Is.EqualTo(true));
+            Assert.That(DB.RemoveArticle(newU1, DB.DB[0]), Is.EqualTo(true));
             Assert.That(DB.NumArticle, Is.EqualTo(3));
             Assert.That(DB.DB[0].Title, Is.EqualTo("GG3B0"));
             Assert.That(DB.DB[0].AuthorAccount, Is.EqualTo("bebe"));
@@ -153,13 +153,10 @@ namespace TeamProject.Tests
             Assert.That(newU1.ArticleID[0], Is.EqualTo(2));
             Assert.That(newU1.ArticleID[1], Is.EqualTo(3));
 
-            Assert.That(DB.RemoveArticle(newU2, "TPA"), Is.EqualTo(false));
+            Assert.That(DB.RemoveArticle(newU2, DB.DB[1]), Is.EqualTo(false));
             Assert.That(DB.NumArticle, Is.EqualTo(3));
 
-            Assert.That(DB.RemoveArticle(newU2, "GG3B1"), Is.EqualTo(false));
-            Assert.That(DB.NumArticle, Is.EqualTo(3));
-        
-            Assert.That(DB.RemoveArticle(newU1, "TPS"), Is.EqualTo(true));
+            Assert.That(DB.RemoveArticle(newU1, DB.DB[2]), Is.EqualTo(true));
             Assert.That(DB.NumArticle, Is.EqualTo(2));
             Assert.That(newU1.NumArticle, Is.EqualTo(1));
             Assert.That(newU1.ArticleID[0], Is.EqualTo(2));
