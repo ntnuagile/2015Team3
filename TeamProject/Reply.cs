@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace TeamProject
 {
-    class Reply
+    public class Reply
     {
-        public string Reply_context;
-        public string user_name;
+        public string Reply_content;
+        public string user_account;
+        public int index;
     }
 }

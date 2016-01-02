@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TeamProject
 {
-    class User
+    public class User
     {
         //暱稱
         private string Name { get; set; }
