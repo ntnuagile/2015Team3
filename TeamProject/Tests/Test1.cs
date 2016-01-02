@@ -162,7 +162,43 @@ namespace TeamProject.Tests
             Assert.That(newU1.ArticleID[0], Is.EqualTo(2));
         }
 
-        
+
+        [Test]
+        public void TestModifyArticle()
+        {
+            ArticleDataBase DB = new ArticleDataBase();
+
+            User newU1 = new User();
+            newU1.IsLogin = true;
+            newU1.SetAccount("mistake");
+
+            User newU2 = new User();
+            newU2.IsLogin = true;
+            newU2.SetAccount("bebe");
+
+            List<string> Content1 = new List<string>();
+            List<string> Content2 = new List<string>();
+
+            Content1.Add("123");
+            Content1.Add("456");
+            Content2.Add("789");
+            Content2.Add("aaaa");
+            Content2.Add("bbbb");
+
+            DB.AddArticle(newU1, "SKT", Content1);
+            DB.AddArticle(newU1, "TPA", Content2);
+
+            Assert.That(DB.ModifyArticle(newU1, DB.DB[0], "TPS", Content2), Is.EqualTo(true));
+            Assert.That(DB.DB[0].Title, Is.EqualTo("TPS"));
+            Assert.That(DB.DB[0].Content.Count, Is.EqualTo(3));
+            Assert.That(DB.DB[0].Content[0], Is.EqualTo("789"));
+            Assert.That(DB.DB[0].Content[1], Is.EqualTo("aaaa"));
+            Assert.That(DB.DB[0].Content[2], Is.EqualTo("bbbb"));
+
+            Assert.That(DB.ModifyArticle(newU2, DB.DB[0], "AsianGodTone", Content2), Is.EqualTo(false));
+        }
+
+
         [Test]
         public void TestSortArticle()
         {

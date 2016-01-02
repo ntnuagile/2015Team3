@@ -95,29 +95,13 @@ namespace TeamProject
 
 
         // 修改..
-        public bool ModifyArticle(User U, string Title, string NewTitle, List<string> NewContent)
+        public bool ModifyArticle(User U, Article Art, string NewTitle, List<string> NewContent)
         {
             if (U.IsLogin == false) return false;
+            if (U.GetAccount() != Art.AuthorAccount) return false;
 
-            int Index = -1;
-            int ArticleIndex = 0;
-
-            for (int i = 0; i < NumArticle; i++)
-            {
-                if (DB[i].AuthorAccount == U.GetAccount() && DB[i].Title == Title)
-                {
-                    Index = i;
-                    ArticleIndex = DB[i].ArticleIndex;
-                }
-            }
-
-            if (Index == -1) return false;  //沒找到
-
-            DB.RemoveAt(Index);
-            NumArticle -= 1;
-
-            U.ArticleID.Remove(ArticleIndex);
-            U.NumArticle -= 1;
+            Art.Title = NewTitle;
+            Art.Content = NewContent;
 
             return true;
         }
