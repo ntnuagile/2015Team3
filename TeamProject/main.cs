@@ -16,6 +16,21 @@ namespace TeamProject
             Console.WriteLine("2. Sign in");
             Console.WriteLine("3. Exit");
 
+           /* List<string> test = new List<string>();
+            test.Add("1234");
+            test.Add("123");
+            test.Add("456");
+
+            List<string> r = new List<string>();
+            r = test.FindAll(x => x.Contains("4"));
+
+            for (int i = 0; i < r.Count; i++ )
+            {
+                Console.WriteLine(r[i]);
+            }*/
+
+            
+
             /*ArticleDataBase DB = new ArticleDataBase();
             Article Art1 = new Article();
             Article Art2 = new Article();

@@ -87,32 +87,36 @@ namespace TeamProject.Tests
             Content3.Add("789");
 
             DB.AddArticle(newU1, "GG3B0", Content1);
-            DB.AddArticle(newU2, "GG3B0", Content2);
+            DB.AddArticle(newU2, "GG3B1", Content2);
             DB.AddArticle(newU1, "TPA", Content3);
 
             Assert.That(DB.NumArticle, Is.EqualTo(3));
 
-            List<int> search = new List<int>();
+            List<Article> result = new List<Article>();
 
-            search = DB.SearchByAuthor("mistake");
-            Assert.That(search.Count, Is.EqualTo(2));
-            Assert.That(search[0], Is.EqualTo(0));
-            Assert.That(search[1], Is.EqualTo(2));
+            result = DB.SearchByAuthor("mistake");
+            Assert.That(result.Count, Is.EqualTo(2));
+            Assert.That(result[0].Title, Is.EqualTo("GG3B0"));
+            Assert.That(result[1].Title, Is.EqualTo("TPA"));
 
-            search = DB.SearchByAuthor("mistake2");
-            Assert.That(search.Count, Is.EqualTo(0));
+            result = DB.SearchByAuthor("mistake2");
+            Assert.That(result.Count, Is.EqualTo(0));
 
-            search = DB.SearchByAuthor("bebe");
-            Assert.That(search.Count, Is.EqualTo(1));
-            Assert.That(search[0], Is.EqualTo(1));
+            result = DB.SearchByAuthor("bebe");
+            Assert.That(result.Count, Is.EqualTo(1));
+            Assert.That(result[0].Title, Is.EqualTo("GG3B1"));
 
-            search = DB.SearchByTitle("GG3B0");
-            Assert.That(search.Count, Is.EqualTo(2));
-            Assert.That(search[0], Is.EqualTo(0));
-            Assert.That(search[1], Is.EqualTo(1));
+            result = DB.SearchByTitle("GG3B0");
+            Assert.That(result.Count, Is.EqualTo(1));
+            Assert.That(result[0].AuthorAccount, Is.EqualTo("mistake"));
 
-            search = DB.SearchByTitle("None");
-            Assert.That(search.Count, Is.EqualTo(0));
+            result = DB.SearchByTitle("GG");
+            Assert.That(result.Count, Is.EqualTo(2));
+            Assert.That(result[0].Title, Is.EqualTo("GG3B0"));
+            Assert.That(result[0].Title, Is.EqualTo("GG3B1"));
+
+            result = DB.SearchByTitle("None");
+            Assert.That(result.Count, Is.EqualTo(0));
         }
 
 

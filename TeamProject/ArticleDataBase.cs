@@ -40,28 +40,18 @@ namespace TeamProject
 
         //Search
 
-        public List<int> SearchByAuthor(string AuthorAccount)
+        public List<Article> SearchByAuthor(string AuthorAccount)
         {
-            List<int> Index = new List<int>();
-
-            for (int i = 0; i < NumArticle; ++i)
-            {
-                if (DB[i].AuthorAccount == AuthorAccount)
-                    Index.Add(DB[i].ArticleIndex);
-            }
-            return Index;
+            List<Article> Arts = new List<Article>();
+            Arts = DB.FindAll(x => x.AuthorAccount == AuthorAccount);
+            return Arts;
         }
 
-        public List<int> SearchByTitle(string Str)
+        public List<Article> SearchByTitle(string Title)
         {
-            List<int> Index = new List<int>();
-
-            for (int i = 0; i < NumArticle; ++i)
-            {
-                if (DB[i].Title == Str)
-                    Index.Add(DB[i].ArticleIndex);
-            }
-            return Index;
+            List<Article> Arts = new List<Article>();
+            Arts = DB.FindAll(x => x.Title.Contains(Title));
+            return Arts;
         }
 
         // Remove
@@ -106,8 +96,45 @@ namespace TeamProject
             return true;
         }
 
-        //Sort
+        // GP
+        public bool GPtoArticle(User U, Article Art)
+        {
+            if (U.IsLogin == false) return false;
+            if (U.GetAccount() == Art.AuthorAccount) return false;
 
+            string result;
+            
+            result = Art.GPList.Find(x => x == U.GetAccount());
+            if (result == U.GetAccount()) return false;
+
+            result = Art.BPList.Find(x => x == U.GetAccount());
+            if (result == U.GetAccount()) return false;
+
+            Art.GoodPoint += 1;
+            Art.GPList.Add(U.GetAccount());
+            return true;
+        }
+
+        // BP
+        public bool BPtoArticle(User U, Article Art)
+        {
+            if (U.IsLogin == false) return false;
+            if (U.GetAccount() == Art.AuthorAccount) return false;
+
+            string result;
+
+            result = Art.GPList.Find(x => x == U.GetAccount());
+            if (result == U.GetAccount()) return false;
+
+            result = Art.BPList.Find(x => x == U.GetAccount());
+            if (result == U.GetAccount()) return false;
+
+            Art.BadPoint += 1;
+            Art.BPList.Add(U.GetAccount());
+            return true;
+        }
+
+        //Sort
         public void SotrByTitle()
         {
             DB.Sort(delegate(Article x, Article y)
