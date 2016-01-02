@@ -26,17 +26,14 @@ namespace TeamProject.Tests
            u2.SetAccount("u2");
 
            
-           ReplyDataBase R =new ReplyDataBase();
 
-            a.RD = R;
-
-           R.PushReply("aaa", u1);
+           a.RD.PushReply("aaa", u1);
            
            Assert.That(a.RD.num, Is.EqualTo(1));
            Assert.That(a.RD.RD[0].Reply_content, Is.EqualTo("aaa"));
            Assert.That(a.RD.RD[0].user_account, Is.EqualTo("u1"));
 
-           R.PushReply("bbb", u2);
+           a.RD.PushReply("bbb", u2);
            
            Assert.That(a.RD.num, Is.EqualTo(2));
            Assert.That(a.RD.RD[1].Reply_content, Is.EqualTo("bbb"));

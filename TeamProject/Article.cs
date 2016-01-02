@@ -19,6 +19,6 @@ namespace TeamProject
         public int BadPoint = 0;
         public List<string> BPList = new List<string>();
 
-        public ReplyDataBase RD;
+        public ReplyDataBase RD=new ReplyDataBase();
     }
 }
