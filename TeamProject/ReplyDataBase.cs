@@ -26,23 +26,20 @@ namespace TeamProject
             return false;
             
         }
-        public int SearchReply(User user)
+        public int SearchReply(string user_account)
         {
-            if (user.IsLogin == true)
-            { 
-                for (int i = 0; i < num; ++i)
-                {
-                    if (RD[i].user_account == user.GetAccount())
-                        return i;
-                }
-            
+            for (int i = 0; i < num; ++i)
+            {
+                if (RD[i].user_account == user_account)
+                    return i;
             }
             
             return -1;
         }
         public bool RemoveReply(User user)
         {
-            int index = SearchReply(user);
+            if (user.IsLogin == false) return false;
+            int index = SearchReply(user.GetAccount());
             if (index == -1) return false;
             for (int i = index + 1; i < num; ++i)
                 RD[i-1] = RD[i];
@@ -51,7 +48,8 @@ namespace TeamProject
         }
         public bool EditReply(User user, string context)
         {
-            int index = SearchReply(user);
+            if (user.IsLogin == false) return false;
+            int index = SearchReply(user.GetAccount());
             if (index == -1) return false;
             RD[index].Reply_content = context;
             return true;
