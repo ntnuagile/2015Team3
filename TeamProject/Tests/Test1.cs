@@ -156,52 +156,47 @@ namespace TeamProject.Tests
             Assert.That(DB.NumArticle, Is.EqualTo(2));
         }
 
-        /*
+        
         [Test]
         public void TestSortArticle()
         {
             ArticleDataBase DB = new ArticleDataBase();
-            Article Art1 = new Article();
-            Article Art2 = new Article();
-            Article Art3 = new Article();
-            Article Art4 = new Article();
 
-            Art1.Title = "ZZZZ";
-            Art1.AuthorAccount = "0";
-            Art1.Content.Add("123");
+            User newU1 = new User();
+            newU1.IsLogin = true;
+            newU1.SetAccount("mistake");
 
-            Art2.Title = "BBB";
-            Art2.AuthorAccount = "4";
-            Art2.Content.Add("GG");
-            Art2.Content.Add("20FF");
+            User newU2 = new User();
+            newU2.IsLogin = true;
+            newU2.SetAccount("bebe");
 
-            Art3.Title = "CCC";
-            Art3.AuthorAccount = "5";
-            Art3.Content.Add("temp");
+            List<string> Content1 = new List<string>();
+            List<string> Content2 = new List<string>();
+            List<string> Content3 = new List<string>();
 
-            Art4.Title = "DDDDD";
-            Art4.AuthorAccount = "2";
-            Art4.Content.Add("LOLLOL");
+            Content1.Add("123");
+            Content2.Add("456");
+            Content3.Add("789");
 
-            DB.AddArticle(Art1);
-            DB.AddArticle(Art2);
-            DB.AddArticle(Art3);
-            DB.AddArticle(Art4);
+            DB.AddArticle(newU1, "BBB", Content1);
+            DB.AddArticle(newU2, "DDDD", Content2);
+            DB.AddArticle(newU1, "CCC", Content3);
 
             DB.SotrByTitle();
 
             Assert.That(DB.DB[0].Title, Is.EqualTo("BBB"));
             Assert.That(DB.DB[1].Title, Is.EqualTo("CCC"));
-            Assert.That(DB.DB[2].Title, Is.EqualTo("DDDDD"));
-            Assert.That(DB.DB[3].Title, Is.EqualTo("ZZZZ"));
+            Assert.That(DB.DB[2].Title, Is.EqualTo("DDDD"));
 
             DB.SotrByTime();
 
-            Assert.That(DB.DB[0].Title, Is.EqualTo("ZZZZ"));
-            Assert.That(DB.DB[1].Title, Is.EqualTo("BBB"));
+            Assert.That(DB.DB[0].Title, Is.EqualTo("BBB"));
+            Assert.That(DB.DB[1].Title, Is.EqualTo("DDDD"));
             Assert.That(DB.DB[2].Title, Is.EqualTo("CCC"));
-            Assert.That(DB.DB[3].Title, Is.EqualTo("DDDDD"));
-        }*/
+        }
+
+
+        //**************************************************************************//
 
 
         ReplyDataBase[] RD = new ReplyDataBase[100];
