@@ -65,16 +65,6 @@ namespace TeamProject.Tests
             Assert.That(newUDB.nowUserQuantity, Is.EqualTo(1));
         }
 
-        [Test]
-        public void TestCheckUser()
-        {
-            UserDatabase newUDB = new UserDatabase();
-            newUDB.SetUserDatabase();
-            User one = new User();
-            one.SetAccount("kkk123");
-            one.SetPassword(newUDB.GetMD5("issecret"));
-            newUDB.AddUser(one);
-            Assert.That(newUDB.CheckUserSignIn("kkk123", "issecret"), Is.EqualTo(true));
-        }
+      
     }
 }
