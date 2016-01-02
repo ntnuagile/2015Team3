@@ -173,7 +173,7 @@ namespace TeamProject.Tests
             ArticleDataBase DB = new ArticleDataBase();
 
             User newU1 = new User();
-            newU1.IsLogin = true;
+            newU1.IsLogin = false;
             newU1.SetAccount("mistake");
 
             User newU2 = new User();
@@ -192,6 +192,9 @@ namespace TeamProject.Tests
             DB.AddArticle(newU1, "SKT", Content1);
             DB.AddArticle(newU1, "TPA", Content2);
 
+            Assert.That(DB.ModifyArticle(newU1, DB.DB[0], "TPS", Content2), Is.EqualTo(false));
+
+            newU1.IsLogin = true;
             Assert.That(DB.ModifyArticle(newU1, DB.DB[0], "TPS", Content2), Is.EqualTo(true));
             Assert.That(DB.DB[0].Title, Is.EqualTo("TPS"));
             Assert.That(DB.DB[0].Content.Count, Is.EqualTo(3));
@@ -250,11 +253,11 @@ namespace TeamProject.Tests
             Assert.That(DB.DB[0].GoodPoint, Is.EqualTo(1));
             Assert.That(DB.DB[0].BadPoint, Is.EqualTo(0));
 
-            Assert.That(DB.BPtoArticle(newU3, DB.DB[0]), Is.EqualTo(true)); //dinter
+            Assert.That(DB.BPtoArticle(newU3, DB.DB[0]), Is.EqualTo(true)); //toyz
             Assert.That(DB.DB[0].GoodPoint, Is.EqualTo(1));
             Assert.That(DB.DB[0].BadPoint, Is.EqualTo(1));
 
-            Assert.That(DB.BPtoArticle(newU4, DB.DB[0]), Is.EqualTo(true)); //toyz
+            Assert.That(DB.BPtoArticle(newU4, DB.DB[0]), Is.EqualTo(true)); //dinter
             Assert.That(DB.DB[0].GoodPoint, Is.EqualTo(1));
             Assert.That(DB.DB[0].BadPoint, Is.EqualTo(2));
 
@@ -275,8 +278,8 @@ namespace TeamProject.Tests
             Assert.That(DB.DB[0].GPList[0], Is.EqualTo("bebe"));
 
             Assert.That(DB.DB[0].BPList.Count, Is.EqualTo(3));
-            Assert.That(DB.DB[0].BPList[0], Is.EqualTo("dinter"));
-            Assert.That(DB.DB[0].BPList[1], Is.EqualTo("toyz"));
+            Assert.That(DB.DB[0].BPList[0], Is.EqualTo("toyz"));
+            Assert.That(DB.DB[0].BPList[1], Is.EqualTo("dinter"));
             Assert.That(DB.DB[0].BPList[2], Is.EqualTo("westdoor"));
         }
 
