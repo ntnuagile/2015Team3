@@ -113,7 +113,7 @@ namespace TeamProject.Tests
             result = DB.SearchByTitle("GG");
             Assert.That(result.Count, Is.EqualTo(2));
             Assert.That(result[0].Title, Is.EqualTo("GG3B0"));
-            Assert.That(result[0].Title, Is.EqualTo("GG3B1"));
+            Assert.That(result[1].Title, Is.EqualTo("GG3B1"));
 
             result = DB.SearchByTitle("None");
             Assert.That(result.Count, Is.EqualTo(0));
