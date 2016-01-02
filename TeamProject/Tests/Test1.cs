@@ -132,28 +132,37 @@ namespace TeamProject.Tests
             List<string> Content1 = new List<string>();
             List<string> Content2 = new List<string>();
             List<string> Content3 = new List<string>();
+            List<string> Content4 = new List<string>();
 
             Content1.Add("123");
             Content2.Add("456");
-            Content3.Add("789");
+            Content3.Add("789")
+            Content4.Add("aaaa");
 
             DB.AddArticle(newU1, "GG3B0", Content1);
             DB.AddArticle(newU2, "GG3B0", Content2);
             DB.AddArticle(newU1, "TPA", Content3);
+            DB.AddArticle(newU1, "TPS", Content4);
 
-            Assert.That(DB.NumArticle, Is.EqualTo(3));
+            Assert.That(DB.NumArticle, Is.EqualTo(4));
             Assert.That(DB.RemoveArticle(newU1, "GG3B0"), Is.EqualTo(true));
+            Assert.That(DB.NumArticle, Is.EqualTo(3));
             Assert.That(DB.DB[0].Title, Is.EqualTo("GG3B0"));
             Assert.That(DB.DB[0].AuthorAccount, Is.EqualTo("bebe"));
-            Assert.That(newU1.NumArticle, Is.EqualTo(1));
+            Assert.That(newU1.NumArticle, Is.EqualTo(2));
             Assert.That(newU1.ArticleID[0], Is.EqualTo(2));
-            Assert.That(DB.NumArticle, Is.EqualTo(2));
+            Assert.That(newU1.ArticleID[1], Is.EqualTo(3));
 
             Assert.That(DB.RemoveArticle(newU2, "TPA"), Is.EqualTo(false));
-            Assert.That(DB.NumArticle, Is.EqualTo(2));
+            Assert.That(DB.NumArticle, Is.EqualTo(3));
 
             Assert.That(DB.RemoveArticle(newU2, "GG3B1"), Is.EqualTo(false));
+            Assert.That(DB.NumArticle, Is.EqualTo(3));
+        
+            Assert.That(DB.RemoveArticle(newU1, "TPS"), Is.EqualTo(true));
             Assert.That(DB.NumArticle, Is.EqualTo(2));
+            Assert.That(newU1.NumArticle, Is.EqualTo(1));
+            Assert.That(newU1.ArticleID[0], Is.EqualTo(2));
         }
 
         
