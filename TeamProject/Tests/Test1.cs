@@ -182,7 +182,7 @@ namespace TeamProject.Tests
             ArticleDataBase DB = new ArticleDataBase();
 
             User newU1 = new User();
-            newU1.IsLogin = false;
+            newU1.IsLogin = true;
             newU1.SetAccount("mistake");
 
             User newU2 = new User();
