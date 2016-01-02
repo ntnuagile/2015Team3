@@ -204,6 +204,84 @@ namespace TeamProject.Tests
 
 
         [Test]
+        public void TestGPnBP()
+        {
+            ArticleDataBase DB = new ArticleDataBase();
+
+            User newU1 = new User();
+            newU1.IsLogin = true;
+            newU1.SetAccount("mistake");
+
+            User newU2 = new User();
+            newU2.IsLogin = true;
+            newU2.SetAccount("bebe");
+
+            User newU3 = new User();
+            newU3.IsLogin = true;
+            newU3.SetAccount("toyz");
+
+            User newU4 = new User();
+            newU4.IsLogin = true;
+            newU4.SetAccount("dinter");
+
+            User newU5 = new User();
+            newU5.IsLogin = false;
+            newU5.SetAccount("westdoor");
+
+            List<string> Content1 = new List<string>();
+
+            Content1.Add("HKE eat shit");
+            Content1.Add("by mistake");
+
+            DB.AddArticle(newU1, "TPA", Content1);
+
+            Assert.That(DB.DB[0].GoodPoint, Is.EqualTo(0));
+            Assert.That(DB.DB[0].BadPoint, Is.EqualTo(0));
+
+            Assert.That(DB.GPtoArticle(newU1, DB.DB[0]), Is.EqualTo(false)); //mistake
+            Assert.That(DB.DB[0].GoodPoint, Is.EqualTo(0));
+            Assert.That(DB.DB[0].BadPoint, Is.EqualTo(0));
+
+            Assert.That(DB.GPtoArticle(newU2, DB.DB[0]), Is.EqualTo(true)); //bebe
+            Assert.That(DB.DB[0].GoodPoint, Is.EqualTo(1));
+            Assert.That(DB.DB[0].BadPoint, Is.EqualTo(0));
+
+            Assert.That(DB.GPtoArticle(newU2, DB.DB[0]), Is.EqualTo(false)); //bebe
+            Assert.That(DB.DB[0].GoodPoint, Is.EqualTo(1));
+            Assert.That(DB.DB[0].BadPoint, Is.EqualTo(0));
+
+            Assert.That(DB.BPtoArticle(newU3, DB.DB[0]), Is.EqualTo(true)); //dinter
+            Assert.That(DB.DB[0].GoodPoint, Is.EqualTo(1));
+            Assert.That(DB.DB[0].BadPoint, Is.EqualTo(1));
+
+            Assert.That(DB.BPtoArticle(newU4, DB.DB[0]), Is.EqualTo(true)); //toyz
+            Assert.That(DB.DB[0].GoodPoint, Is.EqualTo(1));
+            Assert.That(DB.DB[0].BadPoint, Is.EqualTo(2));
+
+            Assert.That(DB.BPtoArticle(newU5, DB.DB[0]), Is.EqualTo(false)); //westdoor
+            Assert.That(DB.DB[0].GoodPoint, Is.EqualTo(1));
+            Assert.That(DB.DB[0].BadPoint, Is.EqualTo(2));
+
+            newU5.IsLogin = true;
+            Assert.That(DB.BPtoArticle(newU5, DB.DB[0]), Is.EqualTo(true)); //westdoor
+            Assert.That(DB.DB[0].GoodPoint, Is.EqualTo(1));
+            Assert.That(DB.DB[0].BadPoint, Is.EqualTo(3));
+
+            Assert.That(DB.GPtoArticle(newU5, DB.DB[0]), Is.EqualTo(false)); //westdoor
+            Assert.That(DB.DB[0].GoodPoint, Is.EqualTo(1));
+            Assert.That(DB.DB[0].BadPoint, Is.EqualTo(3));
+
+            Assert.That(DB.DB[0].GPList.Count, Is.EqualTo(1));
+            Assert.That(DB.DB[0].GPList[0], Is.EqualTo("bebe"));
+
+            Assert.That(DB.DB[0].BPList.Count, Is.EqualTo(3));
+            Assert.That(DB.DB[0].BPList[0], Is.EqualTo("dinter"));
+            Assert.That(DB.DB[0].BPList[1], Is.EqualTo("toyz"));
+            Assert.That(DB.DB[0].BPList[2], Is.EqualTo("westdoor"));
+        }
+
+
+        [Test]
         public void TestSortArticle()
         {
             ArticleDataBase DB = new ArticleDataBase();
@@ -241,7 +319,10 @@ namespace TeamProject.Tests
             Assert.That(DB.DB[2].Title, Is.EqualTo("CCC"));
         }
 
-
+        //**************************************************************************//
+        //                                                                          //
+        //               GG3B0~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~             //
+        //                                                                          //
         //**************************************************************************//
 
 
