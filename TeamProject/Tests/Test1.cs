@@ -106,12 +106,12 @@ namespace TeamProject.Tests
             Assert.That(search.Count, Is.EqualTo(1));
             Assert.That(search[0], Is.EqualTo(1));
 
-            search = DB.SearchByAuthor("GG3B0");
+            search = DB.SearchByTitle("GG3B0");
             Assert.That(search.Count, Is.EqualTo(2));
             Assert.That(search[0], Is.EqualTo(0));
             Assert.That(search[1], Is.EqualTo(1));
 
-            search = DB.SearchByAuthor("None");
+            search = DB.SearchByTitle("None");
             Assert.That(search.Count, Is.EqualTo(0));
         }
 
