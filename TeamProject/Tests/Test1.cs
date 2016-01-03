@@ -343,7 +343,50 @@ namespace TeamProject.Tests
         //               GG3B0~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~             //
         //                                                                          //
         //**************************************************************************//
+        [Test]
+        public void TestSearchContent()
+        {
+            ArticleDataBase DB = new ArticleDataBase();
 
+            User newU1 = new User();
+            newU1.IsLogin = true;
+            newU1.SetAccount("mistake");
+
+            User newU2 = new User();
+            newU2.IsLogin = true;
+            newU2.SetAccount("bebe");
+
+            List<string> Content1 = new List<string>();
+            List<string> Content2 = new List<string>();
+            List<string> Content3 = new List<string>();
+
+            Content1.Add("123");
+            Content2.Add("456");
+            Content3.Add("789");
+
+            DB.AddArticle(newU1, "BBB", Content1);
+            DB.AddArticle(newU2, "DDDD", Content2);
+            DB.AddArticle(newU1, "CCC", Content3);
+
+            Assert.That(DB.SearchByContent("123").Count,Is.EqualTo(1));
+            Assert.That(DB.SearchByContent("123")[0].Title, Is.EqualTo("BBB"));
+            Assert.That(DB.SearchByContent("123")[0].Content[0], Is.EqualTo("123"));
+
+            List<string> Content4 = new List<string>();
+            Content4.Add("123");
+            Content4.Add("456");
+            Content4.Add("789");
+
+            DB.AddArticle(newU2,"newlongArticle",Content4);
+
+            Assert.That(DB.SearchByContent("123").Count,Is.EqualTo(2));
+            Assert.That(DB.SearchByContent("123")[0].Title, Is.EqualTo("BBB"));
+            Assert.That(DB.SearchByContent("123")[1].Title, Is.EqualTo("newlongArticle"));
+            Assert.That(DB.SearchByContent("123")[0].Content[0], Is.EqualTo("123"));
+            Assert.That(DB.SearchByContent("123")[1].Content[0], Is.EqualTo("123"));
+            Assert.That(DB.SearchByContent("123")[1].Content[1], Is.EqualTo("456"));
+            Assert.That(DB.SearchByContent("123")[1].Content[2], Is.EqualTo("789"));
+            }
         
     }
 }
