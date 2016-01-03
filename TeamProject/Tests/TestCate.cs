@@ -15,12 +15,21 @@ namespace TeamProject.Tests
         {
             Category cate=new Category();
             ArticleDataBase DB = new ArticleDataBase();
+            ArticleDataBase DB2 = new ArticleDataBase();
+            ArticleDataBase DB3 = new ArticleDataBase();
             DB.BlockName = "123";
+            DB2.BlockName = "abc";
+            DB3.BlockName = "555";
             cate.AddCategory(DB);
+            cate.AddCategory(DB2);
+            cate.AddCategory(DB3);
+            cate.GetADB(1);
+            cate.GetADB(1);
             Assert.That(cate.SearchCate("123"), Is.EqualTo(0));
-            Assert.That(cate.NumCategory, Is.EqualTo(1));
-            cate.DeleteCate("123");
-            Assert.That(cate.SearchCate("123"), Is.EqualTo(-1));
+            Assert.That(cate.SearchCate("abc"), Is.EqualTo(1));
+            Assert.That(cate.NumCategory, Is.EqualTo(3));
+            cate.DeleteCate("abc");
+            Assert.That(cate.SearchCate("abc"), Is.EqualTo(-1));
         }
     }
 }
