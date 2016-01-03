@@ -87,5 +87,19 @@ namespace TeamProject
         public int NumArticle = 0;
         public List<int> ArticleID = new List<int>();
 
+
+        //關注版區
+        public const int FocusBlockMaxNumber=10;
+        public int FocusBlockNumber = 0;
+        public string[] FocusBlock = new string[FocusBlockMaxNumber];
+        public void SetFocusBlock(string BlockName)
+        {
+            if(FocusBlockNumber<FocusBlockMaxNumber)
+            {
+                FocusBlock[FocusBlockNumber] = BlockName;
+                FocusBlockNumber++;
+            }
+        }
+
     }
 }
