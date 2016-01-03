@@ -64,6 +64,18 @@ namespace TeamProject.Tests
             Assert.That(newUDB.SetANewUser("asdzxc", "AABB", 'F', "321321", "2016/11/11", "E123456789", newUDB.IsAccountAvaliable("asdzxc")), Is.EqualTo(false));
             Assert.That(newUDB.nowUserQuantity, Is.EqualTo(1));
         }
+        [Test]
+        public void TestSignIn()
+        {
+            UserDatabase newUDB = new UserDatabase();
+            newUDB.SetUserDatabase();
+            User newUser=new User();
+            newUser.SetAccount("kkk");
+            newUser.SetPassword("12345");
+            newUDB.AddUser(newUser);
+            Assert.That(newUDB.SignIn("kkk", "12345"), Is.EqualTo(0));
+            
+        }
 
       
     }
