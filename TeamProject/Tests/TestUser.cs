@@ -10,26 +10,32 @@ namespace TeamProject.Tests
     [TestFixture]
     public class TestUser
     {
-        User userA=new User(); 
         [Test]
         public void TestAddFocusBlock
         {
-            //User userFuck=new User();
-            userA.SetFocusBlock(Smart);
-            userA.SetFocusBlock(Ha);
-            Assert.That(SearchBlock(Smart),Is.EqaulTo(0));
+            User userW=new User();
+            userW.SetFocusBlock(Smart);
+            userW.SetFocusBlock(Ha);
+            Assert.That(userW.SearchBlock(Smart),Is.EqaulTo(0));
+            Assert.That(userW.searchBlock(Ha),Is.EqualTo(1));
             //測試10個還能不能加
-            for(int i=0;i<8;++i)userA.SetFocusBlock(Stupid);
-            userA.SetFocusBlock(Overflow)
-            Assert.That(searchBlock(Overflow),Is.EqualTo(-1));
+            for(int i=0;i<8;++i)
+            {
+                userW.SetFocusBlock(Stupid);
+            }
+            userW.SetFocusBlock(Overflow)
+            Assert.That(userW.searchBlock(Overflow),Is.EqualTo(-1));
         }
         [Test]
         public void TestDeleteFocusBlock
         {
-            //User userB=new User();
-            userA.DeleteFocusBlock(Smart);
-            Assert.That(searchBlock(Smart),Is.EqualTo(-1));
-            Assert.That(searchBlock(Ha),Is.EqualTo(0));
+            User userB=new User();
+            userB.SetFocusBlock(Smart);
+            userB.SetFocusBlock(Ha);
+            userB.DeleteFocusBlock(Smart);
+            Assert.That(userB.searchBlock(Smart),Is.EqualTo(-1));
+            Assert.That(userB.searchBlock(Ha),Is.EqualTo(0));
+
         }
 
     }
