@@ -10,12 +10,12 @@ namespace TeamProject
     {
         public Reply[] RD = new Reply[100];
         public int num = 0;
-        public int Article_ID=0;
-        public bool PushReply(string content,User user)
+        public int Article_ID = 0;
+        public bool PushReply(string content, User user)
         {
-            if(num<100 && user.IsLogin==true)
+            if (num < 100 && user.IsLogin == true)
             {
-                Reply r=new Reply();
+                Reply r = new Reply();
                 r.user_account = user.GetAccount();
                 r.Reply_content = content;
                 r.index = num;
@@ -24,32 +24,48 @@ namespace TeamProject
                 return true;
             }
             return false;
-            
+
         }
-        public int SearchReply(string user_account)
+        public int ReplyAddress(string user_account)
         {
             for (int i = 0; i < num; ++i)
             {
                 if (RD[i].user_account == user_account)
                     return i;
             }
-            
+
             return -1;
         }
+        public Reply SearchReply(string user_account)
+        {
+            Reply r = new Reply();
+            for (int i = 0; i < num; ++i)
+            {
+                if (RD[i].user_account == user_account)
+                {
+                    r.index = RD[i].index;
+                    r.Reply_content = RD[i].Reply_content;
+                    r.user_account = RD[i].user_account;
+                }
+            }
+
+            return r;
+        }
+
         public bool RemoveReply(User user)
         {
             if (user.IsLogin == false) return false;
-            int index = SearchReply(user.GetAccount());
+            int index = ReplyAddress(user.GetAccount());
             if (index == -1) return false;
             for (int i = index + 1; i < num; ++i)
-                RD[i-1] = RD[i];
+                RD[i - 1] = RD[i];
             num -= 1;
             return true;
         }
         public bool EditReply(User user, string context)
         {
             if (user.IsLogin == false) return false;
-            int index = SearchReply(user.GetAccount());
+            int index = ReplyAddress(user.GetAccount());
             if (index == -1) return false;
             RD[index].Reply_content = context;
             return true;
