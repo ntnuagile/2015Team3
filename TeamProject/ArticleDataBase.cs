@@ -53,7 +53,12 @@ namespace TeamProject
             Arts = DB.FindAll(x => x.Title.Contains(Title));
             return Arts;
         }
-
+        public List<Article> SearchByContext(string keyword)
+        {
+            List<Article> Arts = new List<Article>();
+            Arts = DB.FindAll(x => x.Content.Contains(keyword));
+            return Arts;
+        }
         // Remove
 
         public bool RemoveArticle(User U, Article Art)
