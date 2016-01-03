@@ -52,14 +52,11 @@ namespace TeamProject
             }
             NumCategory -= 1;
         }
+        
         public void DeleteCate(string name)
         {
             int i = SearchCate(name);
-            for (; i < NumCategory - 1; i += 1)
-            {
-                CategoryList[i] = CategoryList[i + 1];
-            }
-            NumCategory -= 1;
+            DeleteCate(i);
         }
     }
 
