@@ -92,14 +92,37 @@ namespace TeamProject
         public const int FocusBlockMaxNumber=10;
         public int FocusBlockNumber = 0;
         public string[] FocusBlock = new string[FocusBlockMaxNumber];
+        //新增關注版區
         public void SetFocusBlock(string BlockName)
         {
             if(FocusBlockNumber<FocusBlockMaxNumber)
             {
                 FocusBlock[FocusBlockNumber] = BlockName;
-                FocusBlockNumber++;
+                ++FocusBlockNumber;
             }
         }
-
+        //刪減關注版區
+        public void DeleteFocusBlock(string BlockName)
+        {
+            int findindex = SearchBlock(BlockName);
+            if(findindex!=-1)
+            {
+                for (int j = findindex + 1; j < FocusBlockNumber; ++j)
+                {
+                    FocusBlock[findindex] = FocusBlock[j];
+                    ++findindex;
+                }
+                --FocusBlockNumber;
+            }
+        }
+        //搜尋關注版區
+        public int SearchBlock(string Name)
+        {
+            for(int i=0;i<FocusBlockNumber;++i)
+            {
+                if (FocusBlock[i] == Name) return i;
+            }
+            return -1;
+        }
     }
 }
