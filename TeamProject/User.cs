@@ -86,6 +86,9 @@ namespace TeamProject
         //給Article用的
         public int NumArticle = 0;
         public List<int> ArticleID = new List<int>();
+        //發文紀錄
+        public List<Record> ArticleRecord = new List<Record>();
+
 
 
         //關注版區
@@ -124,5 +127,11 @@ namespace TeamProject
             }
             return -1;
         }
+
+    }
+    public class Record
+    {
+        public string BlockName = "";
+        public int ArticleIndex = 0;
     }
 }

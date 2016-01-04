@@ -29,6 +29,13 @@ namespace TeamProject
 
             U.ArticleID.Add(ArticleIndex);
             U.NumArticle += 1;
+            //user article record
+            Record record = new Record();
+            record.ArticleIndex = ArticleIndex;
+            record.BlockName = BlockName;
+            U.ArticleRecord.Add(record);
+
+
 
             DB.Add(Art);
 
