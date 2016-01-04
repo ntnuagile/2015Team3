@@ -14,6 +14,7 @@ namespace TeamProject.Tests
         public void TestAddFocus()
         {
             User userW=new User();
+            //新增版
             userW.SetFocusBlock("Smart");
             userW.SetFocusBlock("Ha");
             Assert.That(userW.SearchBlock("Smart"),Is.EqualTo(0));
@@ -30,12 +31,24 @@ namespace TeamProject.Tests
         public void TestDeleteFocusBlock()
         {
             User userB=new User();
+            //沒有版
+            userB.DeleteFocusBlock("Nothing");
+            Assert.That(userB.SearchBlock("Nothing"), Is.EqualTo(-1));
+            //刪除版並排序
             userB.SetFocusBlock("Smart");
             userB.SetFocusBlock("Ha");
             userB.DeleteFocusBlock("Smart");
             Assert.That(userB.SearchBlock("Smart"),Is.EqualTo(-1));
             Assert.That(userB.SearchBlock("Ha"),Is.EqualTo(0));
             
+        }
+        [Test]
+        public void TestLogout()
+        {
+            User userC = new User();
+            userC.IsLogin = true;
+            userC.Logout();
+            Assert.That(userC.IsLogin, Is.EqualTo(false));
         }
 
     }
